@@ -2,4 +2,9 @@
 
 <h1>hello, <%= user ? user.name : "friend" %></h1>
 
+<% if (user) { %>
+  <a href="/users/profile">My Profile</a>
+
+<% } %> 
+
 <%- include('partials/footer') %>
