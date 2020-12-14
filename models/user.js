@@ -7,6 +7,8 @@ const userSchema = new Schema(
     email: String,
     avatar: String,
     googleId: String,
+    bio: String,
+    collections: [{type: Schema.Types.ObjectId, ref: 'Collection'}]
   },
   {
     timestamps: true,
