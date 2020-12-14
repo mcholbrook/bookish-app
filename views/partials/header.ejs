@@ -11,6 +11,15 @@
       <ul>
         <% if (user) { %>
         <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/users/profile">My Profile</a>
+        </li>
+        <li>
+          <a href="/books/index">Browse All Books</a>
+        </li>
+        <li>
           <a href="/auth/logout">Log Out</a>
         </li>
         <% } else { %>
@@ -20,3 +29,5 @@
         <% } %>
       </ul>
     </nav>
+
+
