@@ -2,4 +2,26 @@
 
 <h1>This is the New Book Page</h1>
 
+<form action="/books/search" method="POST">
+<input type="text" name="query" placeholder="Search for a book...">
+<button type="submit">Search</button>
+
+
+</form>
+<% if (results){ %>
+  <% results.forEach(book => { %>
+    <div>
+      <p>Title: <%= book.volumeInfo.title %> </p>
+      <p>Author: <%= book.volumeInfo.authors %> </p>
+      <p>Published: <%= book.volumeInfo.publishedDate %> </p>
+      <p>Description: <%= book.volumeInfo.description %> </p>
+      <p>Cover Art: 
+        <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="">
+      </p>
+    </div>
+    <br>
+ <% }) %>
+<% } %> 
+ 
+
 <%- include('../partials/footer') %> 
