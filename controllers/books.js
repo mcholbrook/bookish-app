@@ -17,7 +17,7 @@ function newBook(req, res){
 
 function search(req, res){
   axios
-  .get(`https://www.googleapis.com/books/v1/volumes?q=${req. body.query}&limit=5`)
+  .get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.query}`)
   .then((response) => {
     console.log(response.data.items)
     res.render('books/new', {

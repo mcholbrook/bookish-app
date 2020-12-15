@@ -15,9 +15,23 @@
       <p>Author: <%= book.volumeInfo.authors %> </p>
       <p>Published: <%= book.volumeInfo.publishedDate %> </p>
       <p>Description: <%= book.volumeInfo.description %> </p>
+
       <p>Cover Art: 
-        <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="">
-      </p>
+        <% if(!book.volumeInfo.imageLinks){%>
+          <p>No image available</p>
+        
+        <% } else { %> 
+         
+
+          <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="">
+          <% } %>
+     
+        
+    
+     
+   </p>
+   
+      <p><a href="#">Details</a></p>
     </div>
     <br>
  <% }) %>
