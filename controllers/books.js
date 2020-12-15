@@ -5,6 +5,7 @@ module.exports = {
   index,
   new: newBook,
   search, 
+  show,
 }
 
 function index(req, res){
@@ -40,4 +41,13 @@ function search(req, res){
   //   title: 'This was a successful Search!',
   //   user: req.user
   // })
+}
+
+function show(req, res){
+  axios
+    .get(`https://www.googleapis.com/books/v1/volumes/${req.params.id}`)
+    .then((response) => {
+      console.log(response.data)
+      res.render('books/show', {title: 'Book Details', response: response.data, user: req.user})
+    })
 }

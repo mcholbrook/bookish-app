@@ -2,4 +2,28 @@
 
 <h1>This is the Book Details/Show Page</h1>
 
+<% console.log(response) %> 
+
+<p><%= response.id %> 
+</p>
+<p>Title: <%= response.volumeInfo.title %> </p>
+<p>Author: <%= response.volumeInfo.authors %> </p>
+<p>Published: <%= response.volumeInfo.publishedDate %> </p>
+<p>Description: <%= response.volumeInfo.description %> </p>
+
+<p>Cover Art: 
+  <% if(!response.volumeInfo.imageLinks){%>
+    <p>No image available</p>
+  
+  <% } else { %> 
+   
+
+    <img src="<%=response.volumeInfo.imageLinks.thumbnail %>" alt="">
+    <% } %>
+
+  
+
+
+</p>
+
 <%- include('../partials/footer') %> 

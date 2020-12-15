@@ -4,6 +4,7 @@ const booksCtrl = require('../controllers/books')
 router.get('/index', isLoggedIn, booksCtrl.index)
 router.get('/new', isLoggedIn, booksCtrl.new)
 router.post('/search', isLoggedIn, booksCtrl.search)
+router.get('/:id', isLoggedIn, booksCtrl.show)
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();
