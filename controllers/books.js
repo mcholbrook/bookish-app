@@ -52,8 +52,27 @@ function show(req, res){
     .then((response) => {
       //console.log(response.data)
       //Book.findOne({googleID: })
-      
-      res.render('books/show', {title: 'Book Details', book: response.data, user: req.user})
+      User.findById(req.user._id)
+      .populate('collections')
+      .then((user) => {
+        Book.findOne({googleBooksId: response.data.id})
+        .then((bookInDb) => {
+          console.log(`This is the book in the DB ${bookInDb}`)
+          if (bookInDb){
+            res.render('books/show', {title: 'Book Details', book: response.data, 
+            user,
+            //user: req.user, 
+            bookInDb})
+          }
+          else {
+            res.render('books/show', {title: 'Book Details', book: response.data, 
+            user,
+            //user: req.user, 
+            bookInDb: ""})
+          }
+        })
+
+      })
     })
 }
 

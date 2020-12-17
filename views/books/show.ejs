@@ -20,8 +20,12 @@
 
     <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="Book Image">
     <% } %>
-
-  <form action="/collections/<%=user.collections[0]._id%>/addBook?_method=PUT" method="POST">
+<% console.log(`This is the CURRENT COLLECTION: ${user.collections[0]}`) %> 
+  <% if (user.collections[0].books.includes(bookInDb._id)){ %>
+    <form action="/collections/<%=user.collections[0]._id%>/deleteBook?_method=DELETE" method="POST"></form>
+  <% } else { %>
+    <form action="/collections/<%=user.collections[0]._id%>/addBook?_method=PUT" method="POST">
+  <% } %> 
     <input type="text" hidden name="title" value="<%= book.volumeInfo.title %>">
     <input type="text" hidden name="author" value="<%=book.volumeInfo.authors %>">
     <% if (book.volumeInfo.imageLinks){ %>
@@ -32,7 +36,9 @@
     <input type="text" hidden name="publishedDate" value="<%= book.volumeInfo.publishedDate %>">
     <input type="text" hidden name="description" value="<%= book.volumeInfo.description %>">
     <input type="text" hidden name="googleBooksId" value="<%= book.id %>">
-    <button type='submit'>Add to My Books</button>
+
+
+    <button type='submit'><%= user.collections[0].books.includes(bookInDb._id) ? "Remove from My Books" : "Add to My Books" %></button>
   </form>
 
 

@@ -9,10 +9,10 @@ module.exports = {
   create,
   show,
   addBook,
+  deleteBook,
 }
 
 function index(req, res){
-  // res.render('collections/index', {title: 'My Collections', user: req.user} )
   User.findById(req.user._id)
   .populate('collections')
   .then((user) => {
@@ -74,6 +74,21 @@ function addBook(req, res){
           })
         })
       }
+    })
+  })
+}
+
+function deleteBook(req, res){
+  Collection.findById(req.params.id)
+  .then((collection) => {
+    Book.findOne({googleBooksId: req.body.GoogleBooksId})
+    .then((book) => {
+      let idx = collection.books.indexOf(book._id)
+      collection.books.splice(idx, 1)
+      collection.save()
+      .then(() => {
+        res.redirect(`/books/${book.googleBooksId}`)
+      })
     })
   })
 }
