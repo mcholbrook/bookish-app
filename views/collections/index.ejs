@@ -1,5 +1,12 @@
 <%- include('../partials/header') %> 
 
 <h1>This is the Collection Index Page</h1>
+<% user.collections.forEach((collection) => { %>
+
+  <p>Title: <%= collection.title %> </p>
+  <img src="<%= collection.cardImage %> " alt=""> 
+
+
+<% }) %> 
 
 <%- include('../partials/footer') %> 
