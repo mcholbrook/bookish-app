@@ -63,6 +63,7 @@ function addBook(req, res){
         })
       }
       else {
+        req.body.description = req.body.description.replace(/<[^>]*>?/gm, '')
         Book.create(req.body)
         .then((book) => {
           //console.log(`This is the new book: ${book}`)

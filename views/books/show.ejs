@@ -9,7 +9,7 @@
 <p>Title: <%= book.volumeInfo.title %> </p>
 <p>Author: <%= book.volumeInfo.authors %> </p>
 <p>Published: <%= book.volumeInfo.publishedDate %> </p>
-<p>Description: <%= book.volumeInfo.description %> </p>
+<p>Description: <%= book.volumeInfo.description.replace(/<[^>]*>?/gm, '') %> </p>
 
 <p>Cover Art: 
   <% if(!book.volumeInfo.imageLinks){%>

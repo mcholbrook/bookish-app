@@ -23,11 +23,13 @@ function search(req, res){
   axios
   .get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.query}`)
   .then((response) => {
-    //console.log(response.data.items)
+    console.log(response.data.items)
+    //let newDescription = response.data.items.volumeInfo.description.replace(/<[^>]*>?/gm, '')
     res.render('books/new', {
       title: 'Search for a Book',
       user: req.user,
-      results: response.data.items
+      results: response.data.items,
+
     })
   })
     // .get(`http://openlibrary.org/search.json?q=${req. body.query}&limit=5`)
