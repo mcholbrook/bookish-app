@@ -5,6 +5,7 @@ const User = require('../models/user')
 module.exports = {
   index,
   new: newCollection,
+  create
 
 }
 
@@ -20,4 +21,21 @@ function index(req, res){
 
 function newCollection(req, res){
   res.render('collections/new', {title: 'Add a Collection', user: req.user })
+}
+
+function create(req, res){
+ req.body.owner = req.user._id
+ for (let key in req.body){
+   if (req.body[key] === '') delete req.body[key]
+ }
+  Collection.create(req.body)
+  .then((collection) => {
+    User.findById(req.user._id)
+    .then((user) => {
+      user.collections.push(collection._id)
+      user.save()
+      res.redirect('/collections')
+    })
+    
+  })
 }
