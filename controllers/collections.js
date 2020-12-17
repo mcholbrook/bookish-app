@@ -7,6 +7,7 @@ module.exports = {
 }
 
 function index(req, res){
+  // res.render('collections/index', {title: 'My Collections', user: req.user} )
   User.findById(req.user._id)
   .then((user) => {
     console.log(`This is ${req.user.name}'s Collections`)
