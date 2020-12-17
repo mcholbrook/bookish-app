@@ -22,7 +22,7 @@
     <% } %>
 <% console.log(`This is the CURRENT COLLECTION: ${user.collections[0]}`) %> 
   <% if (user.collections[0].books.includes(bookInDb._id)){ %>
-    <form action="/collections/<%=user.collections[0]._id%>/deleteBook?_method=DELETE" method="POST"></form>
+    <form action="/collections/<%=user.collections[0]._id%>/deleteBook?_method=DELETE" method="POST">
   <% } else { %>
     <form action="/collections/<%=user.collections[0]._id%>/addBook?_method=PUT" method="POST">
   <% } %> 

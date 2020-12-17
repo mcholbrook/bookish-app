@@ -81,7 +81,7 @@ function addBook(req, res){
 function deleteBook(req, res){
   Collection.findById(req.params.id)
   .then((collection) => {
-    Book.findOne({googleBooksId: req.body.GoogleBooksId})
+    Book.findOne({googleBooksId: req.body.googleBooksId})
     .then((book) => {
       let idx = collection.books.indexOf(book._id)
       collection.books.splice(idx, 1)

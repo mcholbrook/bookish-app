@@ -12,7 +12,7 @@
 <% } else { %>
 
   <% collection.books.forEach((book) => { %>
-  <%= book.title %> 
+  <a href="/books/<%=book.googleBooksId%>"><%= book.title %></a> 
   <img src="<%= book.bookImage %> " alt="">
   
   <% }) %> 
