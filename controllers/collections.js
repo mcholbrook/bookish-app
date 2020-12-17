@@ -3,7 +3,9 @@ const Book = require('../models/book')
 const User = require('../models/user')
 
 module.exports = {
-  index
+  index,
+  new: newCollection,
+
 }
 
 function index(req, res){
@@ -13,4 +15,8 @@ function index(req, res){
     console.log(`This is ${req.user.name}'s Collections`)
     res.render('collections/index', {title: 'My Collections', user})
   })
+}
+
+function newCollection(req, res){
+  res.render('collections/new', {title: 'Add a Collection', user: req.user })
 }

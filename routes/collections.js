@@ -2,6 +2,7 @@ const router = require('express').Router()
 const collectionsCtrl = require('../controllers/collections')
 
 router.get('/', collectionsCtrl.index)
+router.get('/new', collectionsCtrl.new)
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();

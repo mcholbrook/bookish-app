@@ -1,0 +1,15 @@
+<%- include('../partials/header') %> 
+
+<h1>This is the New Collection Page</h1>
+
+<form action="/collections" method="POST">
+
+<input type="text" name="title" placeholder='Name of Collection'>
+<br>
+<input type="text" name='cardImage' placeholder='URL for Card Image'>
+<br>
+<button type="submit">Create Collection</button>
+
+</form>
+
+<%- include('../partials/footer') %> 
