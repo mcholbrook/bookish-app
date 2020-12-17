@@ -1,12 +1,13 @@
 const Collection = require('../models/collection')
 const Book = require('../models/book')
 const User = require('../models/user')
+const { defaultMaxListeners } = require('bl')
 
 module.exports = {
   index,
   new: newCollection,
-  create
-
+  create,
+  show
 }
 
 function index(req, res){
@@ -37,5 +38,12 @@ function create(req, res){
       res.redirect('/collections')
     })
     
+  })
+}
+
+function show(req, res){
+  Collection.findById(req.params.id)
+  .then((collection) => {
+    res.render('collections/show', {title: 'Collection Details', collection, user: req.user._id })
   })
 }

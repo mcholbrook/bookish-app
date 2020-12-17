@@ -1,11 +1,14 @@
 const Book = require('../models/book')
+const User = require('../models/user')
 const axios = require('axios')
+const { Collection } = require('mongoose')
 
 module.exports = {
   index,
   new: newBook,
   search, 
   show,
+  update
 }
 
 function index(req, res){
@@ -20,7 +23,7 @@ function search(req, res){
   axios
   .get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.query}`)
   .then((response) => {
-    console.log(response.data.items)
+    //console.log(response.data.items)
     res.render('books/new', {
       title: 'Search for a Book',
       user: req.user,
@@ -47,7 +50,33 @@ function show(req, res){
   axios
     .get(`https://www.googleapis.com/books/v1/volumes/${req.params.id}`)
     .then((response) => {
-      console.log(response.data)
-      res.render('books/show', {title: 'Book Details', response: response.data, user: req.user})
+      //console.log(response.data)
+      //Book.findOne({googleID: })
+      
+      res.render('books/show', {title: 'Book Details', book: response.data, user: req.user})
     })
+}
+
+function update(req, res){
+  Book.findOne({googleBooksId: req.params.id})
+  .then((book) => {
+    if (!book){
+      
+    }
+    User.findById(req.user._id)
+    .then((user) => {
+      console.log(`These collections belong to me`)
+      user.collections.forEach((collection) => {
+        console.log(`User collections: ${collection}`)
+        // if (collection.title === 'My Books'){
+        //   collection.books.push(book._id)
+        //   collection.save()
+        //   console.log(`This is the collection: ${collection}`)
+        // }
+      })
+      res.redirect(`/books/${req.params.id}`)
+    })
+    //THIS IS A BIG NOTE IN THE MORNING THAT THE REASON THIS IS NOT WORKING IS BECAUSE YOU HAVE TO CREATE THE BOOK MODEL OBJECT FIRST
+  }
+  )
 }
