@@ -53,8 +53,9 @@ function show(req, res){
 function addBook(req, res){
   Collection.findById(req.params.id)
   .then((collection) => {
-    Book.findOne({googleBooksId: req.body.GoogleBooksId})
+    Book.findOne({googleBooksId: req.body.googleBooksId})
     .then((book) => {
+      console.log(`This is the Book in the DB: ${book}`)
       if (book){
         collection.books.push(book._id)
         collection.save()
@@ -63,7 +64,7 @@ function addBook(req, res){
         })
       }
       else {
-        req.body.description = req.body.description.replace(/<[^>]*>?/gm, '')
+        //req.body.description = req.body.description.replace(/<[^>]*>?/gm, '')
         Book.create(req.body)
         .then((book) => {
           //console.log(`This is the new book: ${book}`)
@@ -84,6 +85,7 @@ function deleteBook(req, res){
   .then((collection) => {
     Book.findOne({googleBooksId: req.body.googleBooksId})
     .then((book) => {
+      console.log(`This is the Book we are removing: ${book}`)
       let idx = collection.books.indexOf(book._id)
       collection.books.splice(idx, 1)
       collection.save()
