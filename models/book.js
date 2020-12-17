@@ -11,7 +11,8 @@ const reviewSchema = new Schema({
 const bookSchema = new Schema({
   title: String,
   author: String,
-  publishedDate: Date,
+  bookImage: String,
+  publishedDate: String,
   type: String,
   description: String,
   googleBooksId: String,

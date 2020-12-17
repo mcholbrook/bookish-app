@@ -24,6 +24,11 @@
   <form action="/collections/<%=user.collections[0]._id%>/addBook?_method=PUT" method="POST">
     <input type="text" hidden name="title" value="<%= book.volumeInfo.title %>">
     <input type="text" hidden name="author" value="<%=book.volumeInfo.authors %>">
+    <% if (book.volumeInfo.imageLinks){ %>
+      <input type="text" hidden name="bookImage" value="<%= book.volumeInfo.imageLinks.thumbnail %>">
+    <% } else { %>
+      <input type="text" hidden name="bookImage" value="https://unsplash.com/photos/zvKx6ixUhWQ/200x200">
+    <% } %> 
     <input type="text" hidden name="publishedDate" value="<%= book.volumeInfo.publishedDate %>">
     <input type="text" hidden name="description" value="<%= book.volumeInfo.description %>">
     <input type="text" hidden name="googleBooksId" value="<%= book.id %>">

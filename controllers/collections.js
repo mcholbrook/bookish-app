@@ -44,6 +44,7 @@ function create(req, res){
 
 function show(req, res){
   Collection.findById(req.params.id)
+  .populate('books')
   .then((collection) => {
     res.render('collections/show', {title: 'Collection Details', collection, user: req.user._id })
   })
@@ -64,7 +65,7 @@ function addBook(req, res){
       else {
         Book.create(req.body)
         .then((book) => {
-          console.log(`This is the new book: ${book}`)
+          //console.log(`This is the new book: ${book}`)
           collection.books.push(book._id)
           collection.save()
           .then(() => {

@@ -12,7 +12,8 @@
 <% } else { %>
 
   <% collection.books.forEach((book) => { %>
-  <%= book %> 
+  <%= book.title %> 
+  <img src="<%= book.bookImage %> " alt="">
   
   <% }) %> 
 <% } %> 
