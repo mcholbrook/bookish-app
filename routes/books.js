@@ -5,7 +5,7 @@ router.get('/', isLoggedIn, booksCtrl.index)
 router.get('/new', isLoggedIn, booksCtrl.new)
 router.post('/search', isLoggedIn, booksCtrl.search)
 router.get('/:id', isLoggedIn, booksCtrl.show)
-router.put('/:id', isLoggedIn, booksCtrl.update)
+// router.put('/:id', isLoggedIn, booksCtrl.update)
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();

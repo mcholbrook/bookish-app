@@ -21,7 +21,7 @@
     <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="Book Image">
     <% } %>
 
-  <form action="/collections/<%=user.collections[0]._id%>" method="POST">
+  <form action="/collections/<%=user.collections[0]._id%>/addBook?_method=PUT" method="POST">
     <input type="text" hidden name="title" value="<%= book.volumeInfo.title %>">
     <input type="text" hidden name="author" value="<%=book.volumeInfo.authors %>">
     <input type="text" hidden name="publishedDate" value="<%= book.volumeInfo.publishedDate %>">

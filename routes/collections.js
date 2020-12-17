@@ -6,6 +6,7 @@ router.get('/', collectionsCtrl.index)
 router.get('/new', collectionsCtrl.new)
 router.post('/', collectionsCtrl.create)
 router.get('/:id', collectionsCtrl.show)
+router.put('/:id/addbook', collectionsCtrl.addBook)
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();

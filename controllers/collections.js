@@ -7,7 +7,8 @@ module.exports = {
   index,
   new: newCollection,
   create,
-  show
+  show,
+  addBook,
 }
 
 function index(req, res){
@@ -45,5 +46,33 @@ function show(req, res){
   Collection.findById(req.params.id)
   .then((collection) => {
     res.render('collections/show', {title: 'Collection Details', collection, user: req.user._id })
+  })
+}
+
+function addBook(req, res){
+  Collection.findById(req.params.id)
+  .then((collection) => {
+    Book.findOne({googleBooksId: req.body.GoogleBooksId})
+    .then((book) => {
+      if (book){
+        collection.books.push(book._id)
+        collection.save()
+        .then(() => {
+          res.redirect(`/books/${book.googleBooksId}`)
+        })
+      }
+      else {
+        Book.create(req.body)
+        .then((book) => {
+          console.log(`This is the new book: ${book}`)
+          collection.books.push(book._id)
+          collection.save()
+          .then(() => {
+            res.redirect(`/books/${book.googleBooksId}`)
+
+          })
+        })
+      }
+    })
   })
 }

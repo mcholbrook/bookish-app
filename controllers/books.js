@@ -8,7 +8,7 @@ module.exports = {
   new: newBook,
   search, 
   show,
-  update
+  
 }
 
 function index(req, res){
@@ -57,26 +57,26 @@ function show(req, res){
     })
 }
 
-function update(req, res){
-  Book.findOne({googleBooksId: req.params.id})
-  .then((book) => {
-    if (!book){
+// function update(req, res){
+//   Book.findOne({googleBooksId: req.params.id})
+//   .then((book) => {
+//     if (!book){
       
-    }
-    User.findById(req.user._id)
-    .then((user) => {
-      console.log(`These collections belong to me`)
-      user.collections.forEach((collection) => {
-        console.log(`User collections: ${collection}`)
-        // if (collection.title === 'My Books'){
-        //   collection.books.push(book._id)
-        //   collection.save()
-        //   console.log(`This is the collection: ${collection}`)
-        // }
-      })
-      res.redirect(`/books/${req.params.id}`)
-    })
-    //THIS IS A BIG NOTE IN THE MORNING THAT THE REASON THIS IS NOT WORKING IS BECAUSE YOU HAVE TO CREATE THE BOOK MODEL OBJECT FIRST
-  }
-  )
-}
+//     }
+//     User.findById(req.user._id)
+//     .then((user) => {
+//       console.log(`These collections belong to me`)
+//       user.collections.forEach((collection) => {
+//         console.log(`User collections: ${collection}`)
+//         // if (collection.title === 'My Books'){
+//         //   collection.books.push(book._id)
+//         //   collection.save()
+//         //   console.log(`This is the collection: ${collection}`)
+//         // }
+//       })
+//       res.redirect(`/books/${req.params.id}`)
+//     })
+//     //THIS IS A BIG NOTE IN THE MORNING THAT THE REASON THIS IS NOT WORKING IS BECAUSE YOU HAVE TO CREATE THE BOOK MODEL OBJECT FIRST
+//   }
+//   )
+// }
