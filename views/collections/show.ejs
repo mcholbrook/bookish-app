@@ -2,4 +2,20 @@
 
 <h1>This is a Collection Show Page</h1>
 
+<%= collection._id %> 
+<br>
+<%= collection.title %> 
+<br>
+
+<% if(collection.books.length === 0){ %>
+  <p>No Books Yet!</p> 
+<% } else { %>
+
+  <% collection.books.forEach((book) => { %>
+  <%= book %> 
+  
+  <% }) %> 
+<% } %> 
+
+
 <%- include('../partials/footer') %> 
