@@ -34,15 +34,48 @@
   </form>
 
 
-  <form action="#" method="POST">
-    <label>Add this book to a collection:</label>
-    <select name="collection">
-      <% user.collections.forEach((collection){ %>
-        <option value="collection.title"></option>
-        
-        <% }) %> 
-      </select>
+  <% user.collections.forEach((collection, idx) => { %>
+    <% if (idx == 0){ %>
+       <%= "" %>  
+    <% } else { %>
+      <% if (collection.books.includes(bookInDb._id)){ %>
+        <form action="/collections/<%=collection._id%>/deleteFromCollection?_method=DELETE" method="POST">
+      <% } else { %>
+        <form action="/collections/<%=collection._id%>/addBook?_method=PUT" method="POST">
+      <% } %> 
+        <input type="text" hidden name="title" value="<%= book.volumeInfo.title %>">
+        <input type="text" hidden name="author" value="<%=book.volumeInfo.authors %>">
+        <% if (book.volumeInfo.imageLinks){ %>
+          <input type="text" hidden name="bookImage" value="<%= book.volumeInfo.imageLinks.thumbnail %>">
+        <% } else { %>
+          <input type="text" hidden name="bookImage" value="https://unsplash.com/photos/zvKx6ixUhWQ/200x200">
+        <% } %> 
+        <input type="text" hidden name="publishedDate" value="<%= book.volumeInfo.publishedDate %>">
+        <input type="text" hidden name="description" value="<%= book.volumeInfo.description.replace(/<[^>]*>?/gm, '') %>">
+        <input type="text" hidden name="googleBooksId" value="<%= book.id %>">
+        <%= collection.title %> 
+        <button type='submit'> <%= collection.books.includes(bookInDb._id) ? `Remove from ${collection.title}` : `Add to ${collection.title}` %></button>
+      </form>
+    <% } %> 
+
+  
+  <% }) %> 
+
+  <form action="/collections/choose" method="POST">
+    <input type="text" hidden name="title" value="<%= book.volumeInfo.title %>">
+    <input type="text" hidden name="author" value="<%=book.volumeInfo.authors %>">
+    <% if (book.volumeInfo.imageLinks){ %>
+      <input type="text" hidden name="bookImage" value="<%= book.volumeInfo.imageLinks.thumbnail %>">
+    <% } else { %>
+      <input type="text" hidden name="bookImage" value="https://unsplash.com/photos/zvKx6ixUhWQ/200x200">
+    <% } %> 
+    <input type="text" hidden name="publishedDate" value="<%= book.volumeInfo.publishedDate %>">
+    <input type="text" hidden name="description" value="<%= book.volumeInfo.description.replace(/<[^>]*>?/gm, '') %>">
+    <input type="text" hidden name="googleBooksId" value="<%= book.id %>">
+      <button type="submit">Add to A Collection</button>
   </form>
+ 
+
 
 <!-- If the book is in a user's collection, allow them to submit a review. THIS IS A NOTE TO ADD CONDITIONS SO THE USER CANNOT LEAVE MORE THAN ONE REVIEW. Maybe a way to render their review at the top and the rest of the reviews below? -->
 <%user.collections.forEach((collection) => {%> 

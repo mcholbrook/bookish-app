@@ -10,6 +10,7 @@ module.exports = {
   show,
   addBook,
   deleteBook,
+  addToCollection
 }
 
 function index(req, res){
@@ -93,4 +94,8 @@ function deleteBook(req, res){
       })
     })
   })
+}
+
+function addToCollection(req, res){
+  
 }
