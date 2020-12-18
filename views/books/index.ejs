@@ -1,5 +1,11 @@
 <%- include('../partials/header') %> 
 
-<h1>This is the Book Index Page</h1>
+<h1>All Books</h1>
+
+<% books.forEach((book) => { %>
+<%= book.title %> 
+<%= book.author %> 
+<img src="<%= book.bookImage %> " alt="">
+<% }) %> 
 
 <%- include('../partials/footer') %> 

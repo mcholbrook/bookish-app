@@ -12,7 +12,10 @@ module.exports = {
 }
 
 function index(req, res){
-  res.render('books/index', {title: "Browse All Books", user: req.user})
+  Book.find({})
+  .then((books) => {
+    res.render('books/index', {title: "Browse All Books", user: req.user, books})
+  })
 }
 
 function newBook(req, res){
