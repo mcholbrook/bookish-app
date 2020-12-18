@@ -57,7 +57,6 @@ function show(req, res){
       .then((user) => {
         Book.findOne({googleBooksId: response.data.id})
         .then((bookInDb) => {
-          console.log(`This is the book in the DB ${bookInDb}`)
           if (bookInDb){
             res.render('books/show', {title: 'Book Details', book: response.data, user,bookInDb})
           }
@@ -69,4 +68,5 @@ function show(req, res){
       })
     })
 }
+
 

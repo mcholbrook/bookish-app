@@ -12,14 +12,14 @@
   <% } else { %> 
     <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="Book Image">
     <% } %>
-  </p>
+</p>
 
 <!-- Conditional rendering for adding a book to the user's My Books collection specifically. This is also what adds a book to the database if it doesn't already exist. -->
-  <% if (user.collections[0].books.includes(bookInDb._id)){ %>
-    <form action="/collections/<%=user.collections[0]._id%>/deleteBook?_method=DELETE" method="POST">
-  <% } else { %>
-    <form action="/collections/<%=user.collections[0]._id%>/addBook?_method=PUT" method="POST">
-  <% } %> 
+<% if (user.collections[0].books.includes(bookInDb._id)){ %>
+  <form action="/collections/<%=user.collections[0]._id%>/deleteBook?_method=DELETE" method="POST">
+<% } else { %>
+  <form action="/collections/<%=user.collections[0]._id%>/addBook?_method=PUT" method="POST">
+<% } %> 
     <input type="text" hidden name="title" value="<%= book.volumeInfo.title %>">
     <input type="text" hidden name="author" value="<%=book.volumeInfo.authors %>">
     <% if (book.volumeInfo.imageLinks){ %>
@@ -32,5 +32,23 @@
     <input type="text" hidden name="googleBooksId" value="<%= book.id %>">
     <button type='submit'><%= user.collections[0].books.includes(bookInDb._id) ? "Remove from My Books" : "Add to My Books" %></button>
   </form>
+
+<!-- If the book is in a user's collection, allow them to submit a review. -->
+<%user.collections.forEach((collection) => {%> 
+  <% if(collection.books.includes(bookInDb._id)) { %>
+    <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
+    <p>Leave a review: </p>
+    <input type="text" name="content" placeholder="Your review...">
+    <button type="submit">Add Review</button>
+    </form>
+  <% } %> 
+<%})%> 
+
+<!-- Print all reviews to the page. -->
+<% bookInDb.reviews.forEach((review) => { %>
+  <%= review.reviewer %> 
+  <img src="<%= review.reviewerPhoto %> " alt="">
+  <%= review.content %> 
+<% }) %> 
 
 <%- include('../partials/footer') %> 

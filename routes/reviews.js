@@ -1,5 +1,7 @@
 const router = require('express').Router()
-const reviewssCtrl = require('../controllers/reviews')
+const reviewsCtrl = require('../controllers/reviews')
+
+router.post('/books/:googleBooksId/reviews', reviewsCtrl.create)
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();
