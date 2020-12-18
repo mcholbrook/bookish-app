@@ -12,6 +12,7 @@ function create(req, res){
   .then((book) => {
     req.body.reviewer = req.user.name
     req.body.reviewerPhoto = req.user.avatar
+    req.body.owner = req.user._id
     book.reviews.push(req.body)
     book.save()
     .then(() => {

@@ -85,7 +85,6 @@ function deleteBook(req, res){
   .then((collection) => {
     Book.findOne({googleBooksId: req.body.googleBooksId})
     .then((book) => {
-      console.log(`This is the Book we are removing: ${book}`)
       let idx = collection.books.indexOf(book._id)
       collection.books.splice(idx, 1)
       collection.save()

@@ -1,0 +1,16 @@
+<%- include('../partials/header') %> 
+
+<h1>This is the User Profile Page</h1>
+
+<%= user.name %> 
+<img src="<%= user.avatar %> " alt=""> 
+
+<form action="/users/profile?_method=PUT" method="POST">
+<input type="text" name="bio" placeholder="Add a bio">
+<button type="submit">Update Bio</button>
+</form>
+
+
+<a href="/users/profile">Cancel</a>
+
+<%- include('../partials/footer') %> 
