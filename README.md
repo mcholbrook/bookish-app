@@ -6,11 +6,12 @@ As a lifelong reader, I have always struggled with trying to keep track of all o
 
 ## Take a look at [Bookish](http://bookishapp.herokuapp.com)! 
 
-See the planning phase [here](https://trello.com/b/XNLgvTBI/unit-2-bookish)
+See the planning phase [here](https://trello.com/b/XNLgvTBI/unit-2-bookish).
 
 ### **Technologies Used**
 
 * Node.js
+* Express
 * MongoDB
 * Mongoose
 * JavaScript
@@ -18,6 +19,8 @@ See the planning phase [here](https://trello.com/b/XNLgvTBI/unit-2-bookish)
 * CSS
 * EJS
 * Google Books API
+* Google OAuth
+* Heroku
   
 ### **Future Enhancements**
 * Collaborative Collections

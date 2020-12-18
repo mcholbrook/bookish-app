@@ -33,11 +33,22 @@
     <button type='submit'><%= user.collections[0].books.includes(bookInDb._id) ? "Remove from My Books" : "Add to My Books" %></button>
   </form>
 
+
+  <form action="#" method="POST">
+    <label>Add this book to a collection:</label>
+    <select name="collection">
+      <% user.collections.forEach((collection){ %>
+        <option value="collection.title"></option>
+        
+        <% }) %> 
+      </select>
+  </form>
+
 <!-- If the book is in a user's collection, allow them to submit a review. THIS IS A NOTE TO ADD CONDITIONS SO THE USER CANNOT LEAVE MORE THAN ONE REVIEW. Maybe a way to render their review at the top and the rest of the reviews below? -->
 <%user.collections.forEach((collection) => {%> 
 
  
-  <% if(collection.books.includes(bookInDb._id) && ) { %>
+  <% if(collection.books.includes(bookInDb._id)) { %>
     <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
     <p>Leave a review: </p>
     <input type="text" name="content" placeholder="Your review...">
