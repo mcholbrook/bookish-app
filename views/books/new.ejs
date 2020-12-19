@@ -11,10 +11,10 @@
   <div class="card-page">
     <% results.forEach((book) => { %>
       
-      <div class="card mb-3 cardModuleBig" style="max-width: 540px;">
+      <div class="card mb-3 cardModule" style="max-width: 540px;">
         <a href="/books/<%= book.id %>">
           <div class="row g-0">
-            <div class="col-md-4">
+            <div class="col-md-4 my-auto">
               <% if(!book.volumeInfo.imageLinks){%>
                 <img src="https://source.unsplash.com/random/128x197/?books,library" alt="..." id="card-image-Big">
               <% } else { %>
@@ -25,8 +25,8 @@
               <div class="card-body">
                 <h5 class="card-title line-clampTitle"><%= book.volumeInfo.title %></h5>
                 <p class="card-text"><small class="text-muted"><%= book.volumeInfo.authors %></small></p>
-                <div id="card-descriptionBig">
-                  <div class="card-text line-clampBig"><%= book.volumeInfo.description %></div> 
+                <div id="card-description">
+                  <div class="card-text line-clamp"><%= book.volumeInfo.description %></div> 
                 </div>
               </div>
             </div>

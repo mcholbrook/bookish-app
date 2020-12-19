@@ -1,8 +1,8 @@
 <%- include('../partials/header') %> 
 
-<h1>This is the Book Details/Show Page</h1>
-<p>Title: <%= book.volumeInfo.title %> </p>
-<p>Author: <%= book.volumeInfo.authors %> </p>
+<h2><%= book.volumeInfo.title %></h2>
+
+<p>By: <%= book.volumeInfo.authors %> </p>
 <p>Published: <%= book.volumeInfo.publishedDate %> </p>
 <p>Description: <%= book.volumeInfo.description.replace(/<[^>]*>?/gm, '') %> </p>
 
@@ -62,31 +62,41 @@
   <% }) %> 
 
 
-<!-- If the book is in a user's collection, allow them to submit a review. THIS IS A NOTE TO ADD CONDITIONS SO THE USER CANNOT LEAVE MORE THAN ONE REVIEW. Maybe a way to render their review at the top and the rest of the reviews below? -->
+<!-- If the book is in a user's collection, allow them to submit a review. If they have already submitted a review, they can't submit a second review.THIS IS A NOTE TO ADD CONDITIONS SO THE USER CANNOT LEAVE MORE THAN ONE REVIEW. Maybe a way to render their review at the top and the rest of the reviews below? -->
 <%user.collections.forEach((collection) => {%> 
   <% if(collection.books.includes(bookInDb._id)) { %>
     <% if (bookInDb) { %>
-      <% bookInDb.reviews.forEach((review) => { %>
-        <% if(review.owner == user._id) { %>
-          <%= "You've left a review, thanks!" %> 
-        <% } else { %>
-          <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
+      <% if (bookInDb.reviews.length === 0){ %>
+        <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
           <p>Leave a review: </p>
           <input type="text" name="content" placeholder="Your review...">
           <button type="submit">Add Review</button>
           </form>
+      <% } else { %> 
+        <% bookInDb.reviews.forEach((review) => { %>
+          <% if(review.owner == user._id) { %>
+            <%= "You've left a review, thanks!" %> 
+          <% } else { %>
+            <%= 'This is in one of your collections! ' %> 
+            <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
+            <p>Leave a review: </p>
+            <input type="text" name="content" placeholder="Your review...">
+            <button type="submit">Add Review</button>
+            </form>
         <% } %> 
-      <%  }) %> 
+         <%  }) %>
+      <% } %> 
       <br>
-      <!-- Print all reviews to the page. -->
-      <% bookInDb.reviews.forEach((review) => { %>
-        <%= review.reviewer %> 
-        <img src="<%= review.reviewerPhoto %> " alt="">
-        <%= review.content %> 
-      <% }) %> 
     <% } %>
   <% } %> 
 <% }) %> 
+
+  <!-- Print all reviews to the page. -->
+  <% bookInDb.reviews.forEach((review) => { %>
+    <%= review.reviewer %> 
+    <img src="<%= review.reviewerPhoto %> " alt="">
+    <%= review.content %> 
+  <% }) %> 
 
    
    
