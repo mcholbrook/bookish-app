@@ -9,9 +9,28 @@ body {
   
 }
 
-.navbar {
-  justify-content: end
+.module {
+  width: 400px;
+  height: 185px;
+  overflow: hidden;
 }
+
+.home-page {
+  display: grid,
+  row
+}
+
+#card-description {
+  height: 100px;
+  overflow: hidden
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+}
+
 
 .avatar-photo-small {
   border-radius: 50%;
