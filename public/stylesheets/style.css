@@ -7,3 +7,9 @@ body {
 nav {
   background-color: white;
 }
+
+.avatar-photo-small {
+  border-radius: 50%;
+  height: 40px;
+  padding: 5px;
+}
