@@ -1,12 +1,17 @@
 body {
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: gray;
+  /* background-color:#292b2c; */
+  background-color: #F6F7F7;
+  
+  /* background-color:white; */
   margin: 0;
-  padding-top: 100px
+  padding-top: 100px;
+  margin-left: 15px;
 }
 
 .navbar-brand {
   font-size: 30px;
+  font-family: 'Special Elite', 'Courier New', Courier, monospace;
 }
 
 .feather-book-open:hover {
@@ -48,6 +53,7 @@ body {
   height: 185px;
   overflow: hidden;
   margin: 10px;
+  background-color: #F8F9FA;
 }
 
 #card-description {
@@ -90,6 +96,11 @@ body {
   padding: 5px;
 }
 
+/* Book Show Page */
 
+.cardModuleShow {
+  border: none;
+  background: #F6F7F7;
+}
 
 

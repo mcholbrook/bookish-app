@@ -16,9 +16,9 @@
           <div class="row g-0">
             <div class="col-md-4 my-auto">
               <% if(!book.volumeInfo.imageLinks){%>
-                <img src="https://source.unsplash.com/random/128x197/?books,library" alt="..." id="card-image-Big">
+                <img src="https://source.unsplash.com/random/128x197/?books,library" alt="...">
               <% } else { %>
-                <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="" id="card-image-big">
+                <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="">
               <% } %>
             </div>
             <div class="col-md-8">

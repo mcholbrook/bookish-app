@@ -24,7 +24,7 @@ function newBook(req, res){
 
 function search(req, res){
   axios
-  .get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.query}`)
+  .get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.query}&key=${process.env.BOOKS_API_KEY}`)
   .then((response) => {
     console.log(response.data.items)
     //let newDescription = response.data.items.volumeInfo.description.replace(/<[^>]*>?/gm, '')
@@ -53,7 +53,7 @@ function search(req, res){
 
 function show(req, res){
   axios
-    .get(`https://www.googleapis.com/books/v1/volumes/${req.params.id}`)
+    .get(`https://www.googleapis.com/books/v1/volumes/${req.params.id}&key=${process.env.BOOKS_API_KEY}`)
     .then((response) => {
       User.findById(req.user._id)
       .populate('collections')

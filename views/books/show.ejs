@@ -1,18 +1,48 @@
 <%- include('../partials/header') %> 
 
+<div class="bookShowHead"></div>
+<img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="">
+
 <h2><%= book.volumeInfo.title %></h2>
 
 <p>By: <%= book.volumeInfo.authors %> </p>
+</div>
 <p>Published: <%= book.volumeInfo.publishedDate %> </p>
 <p>Description: <%= book.volumeInfo.description.replace(/<[^>]*>?/gm, '') %> </p>
 
-<p>Cover Art: 
-  <% if(!book.volumeInfo.imageLinks){%>
-    <p>No image available</p>
-  <% } else { %> 
-    <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="Book Image">
-    <% } %>
-</p>
+
+<div class="card mb-3 cardModuleShow" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4 my-auto">
+      <% if(!book.volumeInfo.imageLinks){%>
+        <img src="https://source.unsplash.com/random/128x197/?books,library" alt="">
+      <% } else { %>
+        <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="">
+      <% } %>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2 class="card-title"><%= book.volumeInfo.title %> </h2>
+        <h4 class="card-text"><%= book.volumeInfo.authors %> </h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="..." alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Conditional rendering for adding a book to the user's My Books collection specifically. This is also what adds a book to the database if it doesn't already exist. -->
 <% if (user.collections[0].books.includes(bookInDb._id)){ %>
@@ -75,9 +105,8 @@
       <% } else { %> 
         <% bookInDb.reviews.forEach((review) => { %>
           <% if(review.owner == user._id) { %>
-            <%= "You've left a review, thanks!" %> 
+            <%=""%> 
           <% } else { %>
-            <%= 'This is in one of your collections! ' %> 
             <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
             <p>Leave a review: </p>
             <input type="text" name="content" placeholder="Your review...">
@@ -92,11 +121,16 @@
 <% }) %> 
 
   <!-- Print all reviews to the page. -->
-  <% bookInDb.reviews.forEach((review) => { %>
-    <%= review.reviewer %> 
-    <img src="<%= review.reviewerPhoto %> " alt="">
-    <%= review.content %> 
-  <% }) %> 
+  <% if (bookInDb && bookInDb.reviews.length!= 0) { %>
+    <% bookInDb.reviews.forEach((review) => { %>
+      <img src="<%= review.reviewerPhoto %> " alt="" class="avatar-photo-small">
+      <%= review.reviewer %> -
+      <%= review.content %> 
+    <% }) %> 
+
+
+
+  <% } %> 
 
    
    
