@@ -12,58 +12,51 @@
     <title><%= title %></title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+    <nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-dark">
       <div class="container-fluid">
-      <a class="navbar-brand" href="/">Bookish
-      <!-- </a> -->
-      <!-- <a href="/"> -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open" id="lilBookIcon"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <% if (user) { %>
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/users/profile">My Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/books">Browse All Books</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/collections">My Collections</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/books/new">Search for a Book</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/collections/new">Add a Collection</a>
-          </li>
-          <li class="nav-item">
-            <img src="<%= user.avatar %>" class="avatar-photo-small" alt="">
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/auth/logout">Log Out</a>
-          </li>
+        <a class="navbar-brand" href="/">Bookish <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open" id="lilBookIcon"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDarkDropdown">
+          <ul class="navbar-nav">
+            <% if (user) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/books">Browse All Books</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/collections">My Collections</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/books/new">Search for a Book</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/collections/new">Add a Collection</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Account
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><img src="<%= user.avatar %>" class="avatar-photo-small" alt="" align="left"><p class="dropdown-item-text">Hi, <%= user.name %>! </p></li>
+                <li><a class="dropdown-item" href="/users/profile">My Profile 
+                </a></li>
+                <li><a class="dropdown-item" href="/auth/logout">Log Out</a></li>
+              </ul>
+            </li>
+          
           <% } else { %>
-          <li class="nav-item">
-            <a class="nav-link" href="/auth/google">Login with Google</a>
-          </li>
-          <% } %>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/google">Login with Google</a>
+            </li>
+          <% }%> 
         </ul>
-    </div>
-  </div>
-</nav>
-
-
+        </div>
+      </div>
+    </nav>
+   
+    
+    

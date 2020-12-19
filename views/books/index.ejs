@@ -1,24 +1,24 @@
 <%- include('../partials/header') %> 
 
-<h1>All Books</h1>
 <div class="home-page">
 <% books.forEach((book) => { %>
-  <div class="card mb-3 module" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        console.log(book.id)
-        <img src="<%= book.bookImage %> " alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <a href="/books/<%= book.googleBooksId %>"><h5 class="card-title"><%= book.title %> ></h5></a>
-          <p class="card-text"><small class="text-muted"><%= book.author %> ></small></p>
-          <div id="card-description"><p class="card-text line-clamp"><%= book.description %> ></p> </div>
+  
+  <div class="card mb-3 cardModule" style="max-width: 540px;">
+    <a href="/books/<%= book.googleBooksId %>">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="<%= book.bookImage %> " alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= book.title %></h5>
+            <p class="card-text"><small class="text-muted"><%= book.author %></small></p>
+            <div id="card-description"><p class="card-text line-clamp"><%= book.description %></p> </div>
+          </div>
         </div>
       </div>
-    </div>
+    </a>
   </div>
-
 <% }) %> 
 </div>
 

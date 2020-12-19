@@ -2,6 +2,13 @@ body {
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: gray;
   margin: 0;
+  padding-top: 100px
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap
 }
 
 .navbar-brand {
@@ -9,10 +16,16 @@ body {
   
 }
 
-.module {
+.cardModule {
   width: 400px;
   height: 185px;
   overflow: hidden;
+  margin: 10px;
+}
+
+.cardModule a {
+  color: black;
+  text-decoration: none
 }
 
 .home-page {
@@ -21,7 +34,7 @@ body {
 }
 
 #card-description {
-  height: 100px;
+  height: 75px;
   overflow: hidden
 }
 
@@ -41,4 +54,10 @@ body {
 .feather-book-open:hover {
   animation: tada;
   animation-duration: 1s
+}
+
+.home-page{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
