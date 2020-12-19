@@ -1,6 +1,5 @@
 <%- include('../partials/header') %> 
 
-<h1>This is the New Book Page</h1>
 
 <form action="/books/search" method="POST">
 <input type="text" name="query" placeholder="Search for a book...">
@@ -9,24 +8,26 @@
 
 </form>
 <% if (results){ %>
-  <div class="home-page">
+  <div class="card-page">
     <% results.forEach((book) => { %>
       
-      <div class="card mb-3 cardModule" style="max-width: 540px;">
+      <div class="card mb-3 cardModuleBig" style="max-width: 540px;">
         <a href="/books/<%= book.id %>">
           <div class="row g-0">
             <div class="col-md-4">
               <% if(!book.volumeInfo.imageLinks){%>
-                <img src="https://source.unsplash.com/random/128x197/?books,library" alt="...">
+                <img src="https://source.unsplash.com/random/128x197/?books,library" alt="..." id="card-image-Big">
               <% } else { %>
-                <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="">
+                <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="" id="card-image-big">
               <% } %>
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title"><%= book.volumeInfo.title %></h5>
+                <h5 class="card-title line-clampTitle"><%= book.volumeInfo.title %></h5>
                 <p class="card-text"><small class="text-muted"><%= book.volumeInfo.authors %></small></p>
-                <div id="card-description"><p class="card-text line-clamp"><%= book.volumeInfo.description %></p> </div>
+                <div id="card-descriptionBig">
+                  <div class="card-text line-clampBig"><%= book.volumeInfo.description %></div> 
+                </div>
               </div>
             </div>
           </div>
