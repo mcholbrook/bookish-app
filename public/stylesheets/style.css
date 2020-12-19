@@ -4,12 +4,22 @@ body {
   margin: 0;
 }
 
-nav {
-  background-color: white;
+.navbar-brand {
+  font-size: 30px;
+  
+}
+
+.navbar {
+  justify-content: end
 }
 
 .avatar-photo-small {
   border-radius: 50%;
   height: 40px;
   padding: 5px;
+}
+
+.feather-book-open:hover {
+  animation: tada;
+  animation-duration: 1s
 }
