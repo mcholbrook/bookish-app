@@ -28,9 +28,15 @@ main {
   text-decoration: none
 }
 
-.home-page {
+/* .home-page {
   display: grid,
   row
+} */
+
+.home-page {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 #card-description {

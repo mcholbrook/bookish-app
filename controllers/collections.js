@@ -66,6 +66,8 @@ function addBook(req, res){
       }
       else {
         //req.body.description = req.body.description.replace(/<[^>]*>?/gm, '')
+        //YOU MAY HAVE TO CHANGE THE BELOW LINE OF CODE
+        req.body.reviews = []
         Book.create(req.body)
         .then((book) => {
           //console.log(`This is the new book: ${book}`)
@@ -97,5 +99,5 @@ function deleteBook(req, res){
 }
 
 function addToCollection(req, res){
-  
+
 }

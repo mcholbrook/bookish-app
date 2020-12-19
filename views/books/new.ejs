@@ -9,32 +9,31 @@
 
 </form>
 <% if (results){ %>
-  <% results.forEach(book => { %>
-    <div>
-      <p>Title: <%= book.volumeInfo.title %> </p>
-      <p>Author: <%= book.volumeInfo.authors %> </p>
-      <p>Published: <%= book.volumeInfo.publishedDate %> </p>
-      <p>Description: <%= book.volumeInfo.description %> </p>
-
-      <p>Cover Art: 
-        <% if(!book.volumeInfo.imageLinks){%>
-          <p>No image available</p>
-        
-        <% } else { %> 
-         
-
-          <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="">
-          <% } %>
-     
-        
-    
-     
-   </p>
-   
-      <p><a href="/books/<%=book.id%> ">Details</a></p>
-    </div>
-    <br>
- <% }) %>
+  <div class="home-page">
+    <% results.forEach((book) => { %>
+      
+      <div class="card mb-3 cardModule" style="max-width: 540px;">
+        <a href="/books/<%= book.id %>">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <% if(!book.volumeInfo.imageLinks){%>
+                <img src="https://source.unsplash.com/random/128x197/?books,library" alt="...">
+              <% } else { %>
+                <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="">
+              <% } %>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= book.volumeInfo.title %></h5>
+                <p class="card-text"><small class="text-muted"><%= book.volumeInfo.authors %></small></p>
+                <div id="card-description"><p class="card-text line-clamp"><%= book.volumeInfo.description %></p> </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    <% }) %> 
+  </div>
 <% } %> 
  
 
