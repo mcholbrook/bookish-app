@@ -11,7 +11,8 @@ module.exports = {
   addBook,
   deleteBook,
   edit,
-  update
+  update,
+  delete: deleteCollection,
 }
 
 function index(req, res){
@@ -108,5 +109,11 @@ function update(req, res){
   .then((collection) => {
     res.redirect(`/collections/${collection._id}`)
   })
-  
+}
+
+function deleteCollection(req, res){
+  Collection.findByIdAndDelete(req.params.id)
+  .then(() => {
+    res.redirect('/collections')
+  })
 }
