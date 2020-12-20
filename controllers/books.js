@@ -37,7 +37,7 @@ function search(req, res){
         title: 'Search for a Book',
         user: req.user,
         results: response.data.items,
-        randomBooks
+        
       
     })
   })
@@ -45,7 +45,7 @@ function search(req, res){
 
 function show(req, res){
   axios
-    .get(`https://www.googleapis.com/books/v1/volumes/${req.params.id}&key=${process.env.BOOKS_API_KEY}`)
+    .get(`https://www.googleapis.com/books/v1/volumes/${req.params.id}`)
     .then((response) => {
       User.findById(req.user._id)
       .populate('collections')
