@@ -26,29 +26,19 @@ function search(req, res){
   axios
   .get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.query}&key=${process.env.BOOKS_API_KEY}`)
   .then((response) => {
-    console.log(response.data.items)
-    //let newDescription = response.data.items.volumeInfo.description.replace(/<[^>]*>?/gm, '')
-    res.render('books/new', {
-      title: 'Search for a Book',
-      user: req.user,
-      results: response.data.items,
-
+    //THIS IS A NOTE TO UP THE LIMIT TO TEN OR SO ONCE SHOW IS WORKING AGAIN
+    let randomBooks = Book.aggregate(
+      [{$sample: {size: 2}}]
+    )
+    .then((randomBooks) => {
+      res.render('books/new', {
+        title: 'Search for a Book',
+        user: req.user,
+        results: response.data.items,
+        randomBooks
+      })
     })
   })
-    // .get(`http://openlibrary.org/search.json?q=${req. body.query}&limit=5`)
-    // .then((response) => {
-    //   console.log(response.data.docs)
-    //   res.render('books/new', {
-    //     title: 'Search for a Book',
-    //     user: req.user,
-    //     results: response
-    //   })
-    // })
-  // console.log('This is a test')
-  // res.render('books/new', {
-  //   title: 'This was a successful Search!',
-  //   user: req.user
-  // })
 }
 
 function show(req, res){

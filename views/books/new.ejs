@@ -1,18 +1,16 @@
 <%- include('../partials/header') %> 
 
 
-  <form action="/books/search" method="POST" class="searchBar w-25">
+<form action="/books/search" method="POST" class="searchBar w-25">
     <div class="input-group mb-3">
-  <input type="text" class="form-control" name="query" placeholder="Search for a book..." aria-describedby="button-addon" id="searchField">
-  <button type="submit" type="button" class="btn btn-dark" id="button-addon">Search</button>
-
-</div>
-  </form>
+    <input type="text" class="form-control" name="query" placeholder="Search for a book..." aria-describedby="button-addon" id="searchField">
+    <button type="submit" type="button" class="btn btn-dark" id="button-addon">Search</button>
+  </div>
+</form> 
 
 <% if (results){ %>
   <div class="card-page">
     <% results.forEach((book) => { %>
-      
       <div class="card mb-3 cardModule" style="max-width: 540px;">
         <a href="/books/<%= book.id %>">
           <div class="row g-0">
@@ -37,6 +35,10 @@
       </div>
     <% }) %> 
   </div>
+<% } else { %>
+  <h4>Here are some ideas to get you started...</h4>
+  
+  
 <% } %> 
  
 
