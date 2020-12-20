@@ -68,17 +68,17 @@ function addBook(req, res){
           res.redirect(`/books/${book.googleBooksId}`)
         })
       }
-      else {
-        //YOU MAY HAVE TO CHANGE THE BELOW LINE OF CODE
-        Book.create(req.body)
-        .then((book) => {
-          collection.books.push(book._id)
-          collection.save()
-          .then(() => {
-            res.redirect(`/books/${book.googleBooksId}`)
-          })
-        })
-      }
+      // else {
+      //   //YOU MAY HAVE TO CHANGE THE BELOW LINE OF CODE
+      //   Book.create(req.body)
+      //   .then((book) => {
+      //     collection.books.push(book._id)
+      //     collection.save()
+      //     .then(() => {
+      //       res.redirect(`/books/${book.googleBooksId}`)
+      //     })
+      //   })
+      // }
     })
   })
 }

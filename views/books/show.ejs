@@ -1,136 +1,101 @@
 <%- include('../partials/header') %> 
 
-<div class="bookShowHead"></div>
-<img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="">
-
-<h2><%= book.volumeInfo.title %></h2>
-
-<p>By: <%= book.volumeInfo.authors %> </p>
-</div>
-<p>Published: <%= book.volumeInfo.publishedDate %> </p>
-<p>Description: <%= book.volumeInfo.description.replace(/<[^>]*>?/gm, '') %> </p>
 
 
-<div class="card mb-3 cardModuleShow" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4 my-auto">
-      <% if(!book.volumeInfo.imageLinks){%>
-        <img src="https://source.unsplash.com/random/128x197/?books,library" alt="">
-      <% } else { %>
-        <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="">
-      <% } %>
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h2 class="card-title"><%= book.volumeInfo.title %> </h2>
-        <h4 class="card-text"><%= book.volumeInfo.authors %> </h4>
+<div class="card mb-3 showCard">
+  <a href="/books/<%= bookInDb.googleBooksId %>">
+    <div class="row g-0">
+      <div class="col-md-4 my-auto">
+        <% if(!bookInDb.bookImage){%>
+          <img src="https://source.unsplash.com/random/128x197/?books,library" alt="...">
+        <% } else { %>
+          <img src="<%=bookInDb.bookImage %>" alt="">
+        <% } %>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h2 class="card-title line-clampTitle"><%= bookInDb.title %></h2>
+          <p class="card-text"><small class="text-muted"><%= bookInDb.author %></small></p>
+          <div id="card-description">
+            <div class="card-text line-clamp"><%= bookInDb.description %></div> 
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </a>
 </div>
 
-<div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="..." alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- Conditional rendering for adding a book to the user's My Books collection specifically. This is also what adds a book to the database if it doesn't already exist. -->
+<!-- Conditional rendering for adding a book to the user's My Books collection specifically. -->
 <% if (user.collections[0].books.includes(bookInDb._id)){ %>
   <form action="/collections/<%=user.collections[0]._id%>/deleteBook?_method=DELETE" method="POST">
 <% } else { %>
   <form action="/collections/<%=user.collections[0]._id%>/addBook?_method=PUT" method="POST">
 <% } %> 
-    <input type="text" hidden name="title" value="<%= book.volumeInfo.title %>">
-    <input type="text" hidden name="author" value="<%=book.volumeInfo.authors %>">
-    <% if (book.volumeInfo.imageLinks){ %>
-      <input type="text" hidden name="bookImage" value="<%= book.volumeInfo.imageLinks.thumbnail %>">
-    <% } else { %>
-      <input type="text" hidden name="bookImage" value="https://unsplash.com/photos/zvKx6ixUhWQ/200x200">
-    <% } %> 
-    <input type="text" hidden name="publishedDate" value="<%= book.volumeInfo.publishedDate %>">
-    <input type="text" hidden name="description" value="<%= book.volumeInfo.description.replace(/<[^>]*>?/gm, '') %>">
-    <input type="text" hidden name="googleBooksId" value="<%= book.id %>">
-    <button type='submit'><%= user.collections[0].books.includes(bookInDb._id) ? "Remove from My Books" : "Add to My Books" %></button>
+    <input type="text" hidden name="googleBooksId" value="<%= bookInDb.googleBooksId %>">
+    <button type='submit' class="btn btn-dark"><%= user.collections[0].books.includes(bookInDb._id) ? "Remove from My Books" : "Add to My Books" %></button>
   </form>
 
-
-  <% user.collections.forEach((collection, idx) => { %>
-    <% if (idx == 0){ %>
-       <%= "" %>  
+<!-- Conditional rendering for adding a book to any of the user's other collections.  -->
+<% user.collections.forEach((collection, idx) => { %>
+  <% if (idx == 0){ %>
+    <%= "" %>  
+  <% } else { %>
+    <% if (collection.books.includes(bookInDb._id)){ %>
+      <form action="/collections/<%=collection._id%>/deleteFromCollection?_method=DELETE" method="POST">
     <% } else { %>
-      <% if (collection.books.includes(bookInDb._id)){ %>
-        <form action="/collections/<%=collection._id%>/deleteFromCollection?_method=DELETE" method="POST">
-      <% } else { %>
-        <form action="/collections/<%=collection._id%>/addBook?_method=PUT" method="POST">
-      <% } %> 
-        <input type="text" hidden name="title" value="<%= book.volumeInfo.title %>">
-        <input type="text" hidden name="author" value="<%=book.volumeInfo.authors %>">
-        <% if (book.volumeInfo.imageLinks){ %>
-          <input type="text" hidden name="bookImage" value="<%= book.volumeInfo.imageLinks.thumbnail %>">
-        <% } else { %>
-          <input type="text" hidden name="bookImage" value="https://unsplash.com/photos/zvKx6ixUhWQ/200x200">
-        <% } %> 
-        <input type="text" hidden name="publishedDate" value="<%= book.volumeInfo.publishedDate %>">
-        <input type="text" hidden name="description" value="<%= book.volumeInfo.description.replace(/<[^>]*>?/gm, '') %>">
-        <input type="text" hidden name="googleBooksId" value="<%= book.id %>">
-        <%= collection.title %> 
-        <button type='submit'> <%= collection.books.includes(bookInDb._id) ? `Remove from ${collection.title}` : `Add to ${collection.title}` %></button>
-      </form>
+      <form action="/collections/<%=collection._id%>/addBook?_method=PUT" method="POST">
     <% } %> 
+      <input type="text" hidden name="googleBooksId" value="<%= bookInDb.googleBooksId %>">
+      <%= collection.title %> 
+      <button type='submit' class="btn btn-dark"> <%= collection.books.includes(bookInDb._id) ? `Remove from ${collection.title}` : `Add to ${collection.title}` %></button>
+    </form>
+  <% } %> 
+<% }) %> 
 
-  
-  <% }) %> 
 
-
-<!-- If the book is in a user's collection, allow them to submit a review. If they have already submitted a review, they can't submit a second review.THIS IS A NOTE TO ADD CONDITIONS SO THE USER CANNOT LEAVE MORE THAN ONE REVIEW. Maybe a way to render their review at the top and the rest of the reviews below? -->
+<!-- If the book is in a user's collection, allow them to submit a review. If they have already submitted a review, they can't submit a second review. Maybe a way to render their review at the top and the rest of the reviews below? -->
+<% let count = 0 %>
 <%user.collections.forEach((collection) => {%> 
+  <% if (count != 0){ %>
+  <%= "" %> 
+ <% } else { %>
   <% if(collection.books.includes(bookInDb._id)) { %>
-    <% if (bookInDb) { %>
-      <% if (bookInDb.reviews.length === 0){ %>
-        <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
+    <% count++ %> 
+    <% console.log(count) %> 
+    <% if (bookInDb.reviews.length === 0){ %>
+      <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
+        <p>Leave a review: </p>
+        <input type="text" name="content" placeholder="Your review...">
+        <button type="submit">Add Review</button>
+        </form>
+    <% } else { %> 
+      <% bookInDb.reviews.forEach((review) => { %>
+        <% if(review.owner == user._id) { %>
+          <%=""%> 
+        <% } else { %>
+          <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
           <p>Leave a review: </p>
           <input type="text" name="content" placeholder="Your review...">
           <button type="submit">Add Review</button>
           </form>
-      <% } else { %> 
-        <% bookInDb.reviews.forEach((review) => { %>
-          <% if(review.owner == user._id) { %>
-            <%=""%> 
-          <% } else { %>
-            <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
-            <p>Leave a review: </p>
-            <input type="text" name="content" placeholder="Your review...">
-            <button type="submit">Add Review</button>
-            </form>
-        <% } %> 
-         <%  }) %>
       <% } %> 
-      <br>
-    <% } %>
-  <% } %> 
+       <%  }) %>
+    <% } %> 
+    <br>
+  <% } %>
+ <% } %>  
 <% }) %> 
+<% count = 0 %> 
 
-  <!-- Print all reviews to the page. -->
-  <% if (bookInDb && bookInDb.reviews.length!= 0) { %>
-    <% bookInDb.reviews.forEach((review) => { %>
-      <img src="<%= review.reviewerPhoto %> " alt="" class="avatar-photo-small">
-      <%= review.reviewer %> -
-      <%= review.content %> 
-    <% }) %> 
-
-
-
-  <% } %> 
+<!-- Print all reviews to the page. -->
+<% if (bookInDb && bookInDb.reviews.length!= 0) { %>
+  <% bookInDb.reviews.forEach((review) => { %>
+    <img src="<%= review.reviewerPhoto %> " alt="" class="avatar-photo-small">
+    <%= review.reviewer %> -
+    <%= review.content %> 
+  <% }) %> 
+<% } %> 
 
    
    

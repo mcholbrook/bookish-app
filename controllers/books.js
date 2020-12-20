@@ -20,11 +20,10 @@ function index(req, res){
 
 function newBook(req, res){
   let randomBooks = Book.aggregate(
-    [{$sample: {size: 2}}]
+    [{$sample: {size: 6}}]
   )
   .then((randomBooks) => {
     res.render('books/new', {title: 'Search for a Book', user: req.user, results: null, randomBooks})
-
   })
 }
 
@@ -32,36 +31,64 @@ function search(req, res){
   axios
   .get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.query}&key=${process.env.BOOKS_API_KEY}`)
   .then((response) => {
-    //THIS IS A NOTE TO UP THE LIMIT TO TEN OR SO ONCE SHOW IS WORKING AGAIN
-      res.render('books/new', {
-        title: 'Search for a Book',
-        user: req.user,
-        results: response.data.items,
-        
-      
+    response.data.items.forEach((book) => {
+      Book.findOne({googleBooksId: book.id})
+      .then((foundBook) => {
+        if (!foundBook){
+          Book.create({title: `${book.volumeInfo.title}`, author: `${book.volumeInfo.authors}`, publishedDate: `${book.volumeInfo.publishedDate}`, googleBooksId: `${book.id}`})
+          .then((bookInDb) => {
+            if (book.volumeInfo.description){
+              Book.findById(bookInDb._id)
+              .then((newestBook) => {
+                newestBook.description = `${book.volumeInfo.description.replace(/<[^>]*>?/gm, '')}`
+                newestBook.save()
+              })
+            }
+            if (book.volumeInfo.imageLinks){
+              Book.findById(bookInDb._id)
+              .then((newestBook) => {
+                newestBook.bookImage = `${book.volumeInfo.imageLinks.thumbnail}`
+                newestBook.save()
+              })
+            } 
+            else {
+              Book.findById(bookInDb._id)
+              .then((newestBook) => {
+                newestBook.bookImage = "https://unsplash.com/photos/zvKx6ixUhWQ/200x200"
+                newestBook.save()
+              })
+            }
+          })
+        }
+      })
+    })
+    res.render('books/new', {
+      title: 'Search for a Book',
+      user: req.user,
+      results: response.data.items,
     })
   })
 }
 
 function show(req, res){
-  axios
-    .get(`https://www.googleapis.com/books/v1/volumes/${req.params.id}`)
-    .then((response) => {
+  // axios
+  //   .get(`https://www.googleapis.com/books/v1/volumes/${req.params.id}`)
+  //   .then((response) => {
       User.findById(req.user._id)
       .populate('collections')
       .then((user) => {
-        Book.findOne({googleBooksId: response.data.id})
+        Book.findOne({googleBooksId: req.params.id})
         .then((bookInDb) => {
           if (bookInDb){
-            res.render('books/show', {title: 'Book Details', book: response.data, user,bookInDb})
+            res.render('books/show', {title: 'Book Details', user,bookInDb})
           }
-          else {
-            res.render('books/show', {title: 'Book Details', book: response.data, user,bookInDb: ""})
-          }
+          // else {
+          //   res.render('books/show', {title: 'Book Details', book: response.data, user,bookInDb: ""})
+          // }
         })
 
       })
-    })
+    // })
 }
 
 
