@@ -1,18 +1,33 @@
 <%- include('../partials/header') %> 
 
-<h1>This is a Collection Show Page</h1>
-<%= collection.title %> 
+<h3><%= collection.title %></h3>
+
 <a href="/collections/<%= collection.id %>/edit">Edit this Collection</a>
 
 <% if(collection.books.length === 0){ %>
   <p>No Books Yet!</p> 
 <% } else { %>
-
+  <div class="collectionShowPage">
   <% collection.books.forEach((book) => { %>
-  <a href="/books/<%=book.googleBooksId%>"><%= book.title %></a> 
-  <img src="<%= book.bookImage %> " alt="">
-  
-  <% }) %> 
+    
+      <div class="card mb-3 cardModule" style="max-width: 540px;">
+        <a href="/books/<%= book.googleBooksId %>">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="<%= book.bookImage %> " alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= book.title %></h5>
+                <p class="card-text"><small class="text-muted"><%= book.author %></small></p>
+                <div id="card-description"><p class="card-text line-clamp"><%= book.description %></p> </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <% }) %> 
+    </div>
 <% } %> 
 
 

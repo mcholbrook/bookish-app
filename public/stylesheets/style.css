@@ -32,6 +32,12 @@ body {
   flex-wrap: wrap;
 }
 
+.collectionShowPage {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+}
+
 .card-page-left {
   display: flex;
   justify-content: left;
@@ -135,3 +141,4 @@ body {
  .collectionCard {
    margin: 10px;
  }
+
