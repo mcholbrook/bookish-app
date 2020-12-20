@@ -7,10 +7,10 @@ router.get('/new', isLoggedIn, collectionsCtrl.new)
 router.post('/', isLoggedIn, collectionsCtrl.create)
 router.get('/:id', isLoggedIn, collectionsCtrl.show)
 router.put('/:id/addbook', isLoggedIn, collectionsCtrl.addBook)
+router.get('/:id/edit', isLoggedIn, collectionsCtrl.edit)
 router.delete('/:id/deleteBook', isLoggedIn, collectionsCtrl.deleteBook)
 router.put('/:id/addToCollection', isLoggedIn, collectionsCtrl.addBook)
 router.delete('/:id/deleteFromCollection', isLoggedIn, collectionsCtrl.deleteBook)
-
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();

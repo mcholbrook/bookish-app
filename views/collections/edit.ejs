@@ -1,0 +1,22 @@
+<%- include('../partials/header') %> 
+
+<h2>Add a Collection</h2>
+
+<form action="/collections" method="POST" class="addCollection col-sm-6">
+  <div class="mb-3">
+    <label for="collectionName" class="form-label">Collection Name</label>
+    <input type="text" class="form-control" name="title" aria-describedby="collectionNameHelp" required>
+    <div id="collectionNameHelp" class="form-text">This can be anything! Comic books? Books about knitting? </div>
+  </div>
+  <div class="mb-3">
+    <label for="cardImageUrl" class="form-label">URL for Card Image</label>
+    <input type="text" class="form-control" name="cardImage">
+  </div>
+  <div class="mb-3">
+    <label for="collectionDescription" class="form-label">Collection Description</label>
+    <textarea class="form-control" name="description" rows="3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-dark">Create Collection</button>
+</form>
+
+<%- include('../partials/footer') %> 

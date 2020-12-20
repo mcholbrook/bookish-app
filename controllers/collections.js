@@ -10,7 +10,7 @@ module.exports = {
   show,
   addBook,
   deleteBook,
-  addToCollection
+  edit
 }
 
 function index(req, res){
@@ -64,16 +64,13 @@ function addBook(req, res){
         })
       }
       else {
-        //req.body.description = req.body.description.replace(/<[^>]*>?/gm, '')
         //YOU MAY HAVE TO CHANGE THE BELOW LINE OF CODE
         Book.create(req.body)
         .then((book) => {
-          //console.log(`This is the new book: ${book}`)
           collection.books.push(book._id)
           collection.save()
           .then(() => {
             res.redirect(`/books/${book.googleBooksId}`)
-
           })
         })
       }
@@ -96,6 +93,9 @@ function deleteBook(req, res){
   })
 }
 
-function addToCollection(req, res){
-
+function edit(req, res){
+  Collection.findById(req.params.id)
+  .then((collection) => {
+    res.render('collections/edit', {title: 'Edit Collection', user: req.user, collection})
+  })
 }

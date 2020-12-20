@@ -1,11 +1,8 @@
 <%- include('../partials/header') %> 
 
 <h1>This is a Collection Show Page</h1>
-
-<%= collection._id %> 
-<br>
 <%= collection.title %> 
-<br>
+<a href="/collections/<%= collection.id %>/edit">Edit this Collection</a>
 
 <% if(collection.books.length === 0){ %>
   <p>No Books Yet!</p> 
