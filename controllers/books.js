@@ -80,7 +80,8 @@ function show(req, res){
         Book.findOne({googleBooksId: req.params.id})
         .then((bookInDb) => {
           if (bookInDb){
-            res.render('books/show', {title: 'Book Details', user,bookInDb})
+            // console.log(user)
+            res.render('books/show', {title: 'Book Details', user, bookInDb})
           }
           // else {
           //   res.render('books/show', {title: 'Book Details', book: response.data, user,bookInDb: ""})

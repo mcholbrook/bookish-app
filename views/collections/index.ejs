@@ -1,6 +1,10 @@
 <%- include('../partials/header') %> 
 
+<div class="collectionsHeader">
 <h3>My Collections</h3>
+<a type="button" class="btn btn-outline-dark" href="/collections/new">Add a Collection</a>
+
+</div>
 
 <div class="card-page-left">
   <% user.collections.forEach((collection) => { %>

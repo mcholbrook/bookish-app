@@ -1,7 +1,7 @@
 <%- include('../partials/header') %> 
 
 
-<form action="/books/search" method="POST" class="searchBar w-25">
+<form action="/books/search" method="POST" class="searchBar">
     <div class="input-group mb-3">
     <input type="text" class="form-control" name="query" placeholder="Search for a book..." aria-describedby="button-addon" id="searchField">
     <button type="submit" type="button" class="btn btn-dark" id="button-addon">Search</button>
@@ -42,14 +42,14 @@
       <div class="card mb-3 cardModule" style="max-width: 540px;">
         <a href="/books/<%= book.googleBooksId %>">
           <div class="row g-0">
-            <div class="col-md-4 my-auto">
+            <div class="col-4 my-auto">
               <% if(!book.bookImage){%>
                 <img src="https://source.unsplash.com/random/128x197/?books,library" alt="...">
               <% } else { %>
                 <img src="<%=book.bookImage %>" alt="">
               <% } %>
             </div>
-            <div class="col-md-8">
+            <div class="col-8">
               <div class="card-body">
                 <h5 class="card-title line-clampTitle"><%= book.title %></h5>
                 <p class="card-text"><small class="text-muted"><%= book.author %></small></p>

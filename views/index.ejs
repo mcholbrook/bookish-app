@@ -1,12 +1,9 @@
 <%- include('partials/header') %>
 
-<h1>hello, <%= user ? user.name : "friend" %></h1>
-<h3>Featured Collections</h3>
-<h3>Collections from Our Community</h3>
-<div class="card-page-left">
-
-
 <% if (user) { %>
+  <h3>Featured Collections</h3>
+  <h3>Collections from Our Community</h3>
+  <div class="card-page-left">
   <% randomCollections.forEach((collection) => { %>
     <div class="card collectionCard" style="width: 18rem;">
       <a href="/collections/<%= collection.id %>">
@@ -27,10 +24,22 @@
     </a> 
     </div>
   <% }) %> 
-
+</div>
+<% } else { %>
+  <div class="loginPage">
+    <div class="card" style="width: 25rem;" id="loginCard">
+      <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Welcome to Bookish!</h5>
+        <p class="card-text">Save, organize, and review all your favorite books.</p>
+        <br>
+        <a href="/auth/google" class="btn btn-outline-dark">Login with Google</a>
+      </div>
+    </div>
+  </div>
 <% } %> 
 
 
-</div>
+
 
 <%- include('partials/footer') %>

@@ -1,6 +1,5 @@
 body {
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  /* background-color:#292b2c; */
   background-color: #F6F7F7;
   margin: 0;
   padding-top: 100px;
@@ -23,6 +22,34 @@ body {
   height: 40px;
   padding: 5px;
 }
+.avatar-photo-med {
+  border-radius: 50%;
+}
+
+.loginPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.profileCollectionsLink a {
+  color: black;
+  text-decoration: none;
+}
+
+.profile {
+  max-width: 400px;
+}
+
+.profileEdit {
+  margin-top: 10px;
+
+}
+ #profileCancel {
+   margin-top: 10px;
+ }
+
 
 /* Grid display for pages that have cards */
 
@@ -101,14 +128,74 @@ body {
 
 /* Book Show Page */
 
-.showCard {
-  border: none;
-  background: #F6F7F7;
+.showPage {
+  display: flex;
+  flex-wrap: wrap;
 }
+
+.showContainer {
+  display: inline-block;
+}
+
+.showContainer img {
+  float: left;
+  margin: 10px;
+}
+
+.showTextContainer {
+  overflow: hidden;
+  margin-right: 10px;
+  margin-top: 5px;
+  
+}
+
+.showPageBookInfo {
+  border: 1px #DFDFDF solid;
+  border-radius: 4px;
+  margin-right: 20px;
+  width: 60vw;
+}
+
+/* Review styling and book show page */
+
+.showPageReviewInfo {
+  border: 1px #DFDFDF solid;
+  border-radius: 4px;
+  width: 30%;
+  padding: 20px;
+  padding-right: 30px;
+}
+
+.oneReview {
+  display: inline-block;
+}
+.oneReview img {
+  float: left;
+}
+
+hr #thickerLine {
+  display: block;
+  height: 4px;
+  border: 0;
+  color: #9B9D9E;
+}
+
+hr {
+  display: block;
+  height: 2px;
+  border: 0;
+  color: #9B9D9E;
+}
+
+.iNeedSpace {
+  margin: 10px;
+  margin-top: 5px;
+}
+
 /* Search Page */
 
 .searchBar {
-  margin-left: 20px;
+  max-width: 400px;
 }
 
 /* Currently only used on book expanded cards */

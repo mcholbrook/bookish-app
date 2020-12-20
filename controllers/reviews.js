@@ -13,6 +13,7 @@ function create(req, res){
     req.body.reviewer = req.user.name
     req.body.reviewerPhoto = req.user.avatar
     req.body.owner = req.user._id
+    req.body.ownerEmail = req.user.email
     book.reviews.push(req.body)
     book.save()
     .then(() => {
