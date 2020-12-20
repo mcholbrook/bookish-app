@@ -1,12 +1,14 @@
 <%- include('../partials/header') %> 
 
 
-<form action="/books/search" method="POST">
-<input type="text" name="query" placeholder="Search for a book...">
-<button type="submit">Search</button>
+  <form action="/books/search" method="POST" class="searchBar w-25">
+    <div class="input-group mb-3">
+  <input type="text" class="form-control" name="query" placeholder="Search for a book..." aria-describedby="button-addon" id="searchField">
+  <button type="submit" type="button" class="btn btn-dark" id="button-addon">Search</button>
 
+</div>
+  </form>
 
-</form>
 <% if (results){ %>
   <div class="card-page">
     <% results.forEach((book) => { %>
