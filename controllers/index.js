@@ -2,6 +2,7 @@ const Book = require('../models/book')
 const User = require('../models/user')
 const Collection = require('../models/collection')
 const axios = require('axios')
+const { populate } = require('../models/book')
 
 module.exports = {
   index
@@ -13,6 +14,15 @@ function index(req, res){
   )
   .then((randomCollections) => {
     console.log(randomCollections)
-    res.render('index', {title:'Bookish', user : req.user ? req.user : null, randomCollections})
+    randomCollections.forEach((collection) => {
+      Collection.findById(collection._id)
+      .populate('owner')
+      .then((collection2) => {
+        randomCollections.shift()
+        randomCollections.push(collection2)
+      }) 
+    })
+    console.log(randomCollections)
+      res.render('index', {title:'Bookish', user : req.user ? req.user : null, randomCollections})
   })
 }

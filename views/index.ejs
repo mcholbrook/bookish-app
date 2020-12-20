@@ -13,7 +13,7 @@
       <img src="<%= collection.cardImage %> " class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title"><%= collection.title %></h5>
-        <p class="card-text"><small class="text-muted">Created by <%=user.name %> </small></p>
+        <p class="card-text"><small class="text-muted">Created by <%=collection.ownerName %> </small></p>
         <% if (collection.description){ %>
           <p class="card-text"><%= collection.description %> </p>
         <% } %> 
