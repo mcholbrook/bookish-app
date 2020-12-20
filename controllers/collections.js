@@ -32,6 +32,7 @@ function create(req, res){
  for (let key in req.body){
    if (req.body[key] === '') delete req.body[key]
  }
+  req.body.ownerName = req.user.name
   Collection.create(req.body)
   .then((collection) => {
     User.findById(req.user._id)
