@@ -19,7 +19,13 @@ function index(req, res){
 }
 
 function newBook(req, res){
-  res.render('books/new', {title: 'Search for a Book', user: req.user, results: null})
+  let randomBooks = Book.aggregate(
+    [{$sample: {size: 2}}]
+  )
+  .then((randomBooks) => {
+    res.render('books/new', {title: 'Search for a Book', user: req.user, results: null, randomBooks})
+
+  })
 }
 
 function search(req, res){
@@ -27,16 +33,12 @@ function search(req, res){
   .get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.query}&key=${process.env.BOOKS_API_KEY}`)
   .then((response) => {
     //THIS IS A NOTE TO UP THE LIMIT TO TEN OR SO ONCE SHOW IS WORKING AGAIN
-    let randomBooks = Book.aggregate(
-      [{$sample: {size: 2}}]
-    )
-    .then((randomBooks) => {
       res.render('books/new', {
         title: 'Search for a Book',
         user: req.user,
         results: response.data.items,
         randomBooks
-      })
+      
     })
   })
 }

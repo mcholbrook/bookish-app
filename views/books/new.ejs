@@ -37,8 +37,33 @@
   </div>
 <% } else { %>
   <h4>Here are some ideas to get you started...</h4>
-  
-  
+  <% console.log(randomBooks) %> 
+  <div class="card-page">
+    <% randomBooks.forEach((book) => { %>
+      <div class="card mb-3 cardModule" style="max-width: 540px;">
+        <a href="/books/<%= book.googleBooksId %>">
+          <div class="row g-0">
+            <div class="col-md-4 my-auto">
+              <% if(!book.bookImage){%>
+                <img src="https://source.unsplash.com/random/128x197/?books,library" alt="...">
+              <% } else { %>
+                <img src="<%=book.bookImage %>" alt="">
+              <% } %>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title line-clampTitle"><%= book.title %></h5>
+                <p class="card-text"><small class="text-muted"><%= book.author %></small></p>
+                <div id="card-description">
+                  <div class="card-text line-clamp"><%= book.description %></div> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    <% }) %> 
+  </div>
 <% } %> 
  
 
