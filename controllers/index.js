@@ -8,5 +8,11 @@ module.exports = {
 }
 
 function index(req, res){
-  res.render('index', {title:'Bookish', user : req.user ? req.user : null})
+  let randomCollections = Collection.aggregate(
+    [{$sample: {size: 2}}]
+  )
+  .then((randomCollections) => {
+    console.log(randomCollections)
+    res.render('index', {title:'Bookish', user : req.user ? req.user : null, randomCollections})
+  })
 }

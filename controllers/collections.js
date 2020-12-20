@@ -27,7 +27,7 @@ function newCollection(req, res){
 }
 
 function create(req, res){
- req.body.owner = req.user._id
+//  req.body.owner = req.user._id
  for (let key in req.body){
    if (req.body[key] === '') delete req.body[key]
  }
@@ -35,6 +35,8 @@ function create(req, res){
   .then((collection) => {
     User.findById(req.user._id)
     .then((user) => {
+      collection.owner.push(req.user._id)
+      collection.save()
       user.collections.push(collection._id)
       user.save()
       res.redirect('/collections')
