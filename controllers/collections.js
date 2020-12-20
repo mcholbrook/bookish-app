@@ -10,7 +10,8 @@ module.exports = {
   show,
   addBook,
   deleteBook,
-  edit
+  edit,
+  update
 }
 
 function index(req, res){
@@ -98,4 +99,12 @@ function edit(req, res){
   .then((collection) => {
     res.render('collections/edit', {title: 'Edit Collection', user: req.user, collection})
   })
+}
+
+function update(req, res){
+  Collection.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .then((collection) => {
+    res.redirect(`/collections/${collection._id}`)
+  })
+  
 }
