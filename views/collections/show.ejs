@@ -7,31 +7,31 @@
 
 <a href="/collections/<%= collection.id %>/edit" type="button" class="btn btn-outline-dark">Edit this Collection</a>
 
-
-<% if(collection.books.length === 0){ %>
+<% if (collection.books.length === 0){ %>
   <h5>There are no books in this collection yet! Go search for some!</h5> 
 <% } else { %>
   <div class="collectionShowPage">
-  <% collection.books.forEach((book) => { %>
-    
-      <div class="card mb-3 cardModule" style="max-width: 540px;">
-        <a href="/books/<%= book.googleBooksId %>">
-          <div class="row g-0">
-            <div class="col-4">
-              <img src="<%= book.bookImage %> " alt="...">
-            </div>
-            <div class="col-8">
-              <div class="card-body">
-                <h5 class="card-title"><%= book.title %></h5>
-                <p class="card-text"><small class="text-muted"><%= book.author %></small></p>
-                <div id="card-description"><p class="card-text line-clamp"><%= book.description %></p> </div>
+    <% collection.books.forEach((book) => { %>
+        <div class="card mb-3 cardModule" style="max-width: 540px;">
+          <a href="/books/<%= book.googleBooksId %>">
+            <div class="row g-0">
+              <div class="col-4">
+                <img src="<%= book.bookImage %> " alt="...">
+              </div>
+              <div class="col-8">
+                <div class="card-body">
+                  <h5 class="card-title line-clampTitle"><%= book.title %></h5>
+                  <p class="card-text"><small class="text-muted"><%= book.author %></small></p>
+                  <div id="card-description"><p class="card-text line-clamp">
+                    <%= book.description %></p> 
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
-      <% }) %> 
-    </div>
+          </a>
+        </div>
+    <% }) %> 
+  </div>
 <% } %> 
 
 

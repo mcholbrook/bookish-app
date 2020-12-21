@@ -1,15 +1,13 @@
 <%- include('../partials/header') %> 
 
 <div class="profile">
-
   <img src="<%= user.avatar %> " class ="avatar-photo-med" alt="">
   <h3><%= user.name %> </h3>
   <div class="profileCollectionsLink">
-      <a href="/collections"><h5><%= user.collections.length %> Collections </h5></a>
-    </div>
-      <p><%= user.bio %> </p>
-      <a type="button" class="btn btn-dark " href="/users/profile/edit">Edit Your Profile</a>
-
-    </div>
+    <a href="/collections"><h5><%= user.collections.length %> Collections </h5></a>
+  </div>
+    <p><%= user.bio %> </p>
+    <a type="button" class="btn btn-dark " href="/users/profile/edit">Edit Your Profile</a>
+</div>
 
 <%- include('../partials/footer') %> 

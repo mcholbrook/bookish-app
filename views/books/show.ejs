@@ -1,87 +1,88 @@
 <%- include('../partials/header') %> 
 
 <div class="showPage">
+  <div class="showPageBookInfo">
+    <div class="showContainer" >
+      <img src="<%= bookInDb.bookImage %> " alt="">
+      <div class="showTextContainer">
+        <h3><%= bookInDb.title %> </h3>
+        <h5><%= bookInDb.author %> </h5>
+        <p><%= bookInDb.description %> </p>
+      </div>
+    </div>
 
-<div class="showPageBookInfo">
-  <div class="showContainer" >
-    <img src="<%= bookInDb.bookImage %> " alt="">
-    <div class="showTextContainer">
-      <h3><%= bookInDb.title %> </h3>
-      <h5><%= bookInDb.author %> </h5>
-      <p><%= bookInDb.description %> </p>
+    <!-- Conditional rendering for adding a book to the user's My Books collection specifically. -->
+    <% if (user.collections[0].books.includes(bookInDb._id)){ %>
+      <form action="/collections/<%=user.collections[0]._id%>/deleteBook?_method=DELETE" method="POST">
+    <% } else { %>
+      <form action="/collections/<%=user.collections[0]._id%>/addBook?_method=PUT" method="POST">
+    <% } %> 
+        <input type="text" hidden name="googleBooksId" value="<%= bookInDb.googleBooksId %>">
+        <button type='submit' class="btn btn-dark iNeedSpace"><%= user.collections[0].books.includes(bookInDb._id) ? "Remove from My Books" : "Add to My Books" %></button>
+      </form>
+
+    <!-- Conditional rendering for adding a book to any of the user's other collections.  -->
+    <div class="dropdown">
+      <button class="btn btn-dark dropdown-toggle iNeedSpace" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        Add to Another Collection
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <% user.collections.forEach((collection, idx) => { %>
+          <% if (idx === 0){ %>
+            <%= "" %> 
+          <% } else { %>
+          <li>
+            <% if (collection.books.includes(bookInDb._id)){ %>
+              <form action="/collections/<%=collection._id%>/deleteFromCollection?_method=DELETE" method="POST">
+            <% } else { %>
+              <form action="/collections/<%=collection._id%>/addBook?_method=PUT" method="POST">
+            <% } %> 
+                <input type="text" hidden name="googleBooksId" value="<%= bookInDb.googleBooksId %>">
+                <button type='submit' class="btn btn-dark dropdown-item"> <%= collection.books.includes(bookInDb._id) ? `Remove from ${collection.title}` : `Add to ${collection.title}` %></button>
+              </form>
+          </li>
+          <% } %> 
+        <% }) %> 
+      </ul>
     </div>
   </div>
 
-  <!-- Conditional rendering for adding a book to the user's My Books collection specifically. -->
-  <% if (user.collections[0].books.includes(bookInDb._id)){ %>
-    <form action="/collections/<%=user.collections[0]._id%>/deleteBook?_method=DELETE" method="POST">
-  <% } else { %>
-    <form action="/collections/<%=user.collections[0]._id%>/addBook?_method=PUT" method="POST">
-  <% } %> 
-    <input type="text" hidden name="googleBooksId" value="<%= bookInDb.googleBooksId %>">
-    <button type='submit' class="btn btn-dark iNeedSpace"><%= user.collections[0].books.includes(bookInDb._id) ? "Remove from My Books" : "Add to My Books" %></button>
-  </form>
-
-  <!-- Conditional rendering for adding a book to any of the user's other collections.  -->
-  <div class="dropdown">
-    <button class="btn btn-dark dropdown-toggle iNeedSpace" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-      Add to Another Collection
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <% user.collections.forEach((collection, idx) => { %>
-       <% if (idx === 0){ %>
-        <%= "" %> 
-      <% } else { %>
-         <li>
-          <% if (collection.books.includes(bookInDb._id)){ %>
-            <form action="/collections/<%=collection._id%>/deleteFromCollection?_method=DELETE" method="POST">
-          <% } else { %>
-            <form action="/collections/<%=collection._id%>/addBook?_method=PUT" method="POST">
-          <% } %> 
-            <input type="text" hidden name="googleBooksId" value="<%= bookInDb.googleBooksId %>">
-            <button type='submit' class="btn btn-dark dropdown-item"> <%= collection.books.includes(bookInDb._id) ? `Remove from ${collection.title}` : `Add to ${collection.title}` %></button>
-          </form>
-         </li>
-       <% } %> 
-      <% }) %> 
-    </ul>
-  </div>
-</div>
-
-<!-- If a user has not submitted a review yet, allow them to submit a review. Print all reviews to the page. -->
-<div class="showPageReviewInfo">
-  <% if (bookInDb.reviews.length == 0) { %>
-    <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
-      <label class="form-label">Leave a Review</label>
-      <textarea name="content" class="form-control" id="reviewInput" row="4"></textarea>
-      <button type="submit" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px">Add Review</button>
-      </form>
-  <% } else { %>
-   <% if (!bookInDb.reviews.some(u => {return u.ownerEmail === user.email})){ %>
+  <!-- If a user has not submitted a review yet, allow them to submit a review. -->
+  <div class="showPageReviewInfo">
+    <% if (bookInDb.reviews.length == 0) { %>
       <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
-      <label class="form-label">Leave a Review</label>
-      <textarea name="content" class="form-control" id="reviewInput" row="4"></textarea>
-      <button type="submit" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px">Add Review</button>
+        <label class="form-label">Leave a Review</label>
+        <textarea name="content" class="form-control" id="reviewInput" row="4"></textarea>
+        <button type="submit" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px">Add Review</button>
       </form>
-   <% } %> 
-  <% } %> 
-
-  <h5>Reviews</h5>
-  <hr id"thickerLine">
-  <% if (bookInDb && bookInDb.reviews.length!= 0) { %>
-    <% bookInDb.reviews.forEach((review, idx) => { %>
-      <div class="oneReview w-100">
-        <img src="<%= review.reviewerPhoto %> " alt="" class="avatar-photo-small">
-        <div id="reviewText">
-        <%= review.reviewer %>
-        <p><small><%= review.content %></small></p> </div>
-      </div>
-      <% if (idx != bookInDb.reviews.length - 1) { %>
-        <hr>
-    <%  } %> 
-    <% }) %> 
-  <% } %> 
-</div> 
-   
+    <% } else { %>
+    <% if (!bookInDb.reviews.some(u => {return u.ownerEmail === user.email})){ %>
+        <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
+          <label class="form-label">Leave a Review</label>
+          <textarea name="content" class="form-control" id="reviewInput" row="4"></textarea>
+          <button type="submit" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px">Add Review</button>
+        </form>
+    <% } %> 
+    <% } %> 
+    
+<!-- Print the reviews to the page. -->
+    <h5>Reviews</h5>
+    <hr id"thickerLine">
+    <% if (bookInDb && bookInDb.reviews.length!= 0) { %>
+      <% bookInDb.reviews.forEach((review, idx) => { %>
+        <div class="oneReview w-100">
+          <img src="<%= review.reviewerPhoto %> " alt="" class="avatar-photo-small">
+          <div id="reviewText">
+            <%= review.reviewer %>
+            <p><small><%= review.content %></small></p> 
+          </div>
+        </div>
+        <% if (idx != bookInDb.reviews.length - 1) { %>
+          <hr>
+        <% } %> 
+      <% }) %> 
+    <% } %> 
+  </div> 
 </div>
+
 <%- include('../partials/footer') %> 

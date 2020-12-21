@@ -1,36 +1,31 @@
 <%- include('../partials/header') %> 
 
 <div class="collectionsHeader">
-<h3>My Collections</h3>
-<a type="button" class="btn btn-outline-dark" href="/collections/new">Add a Collection</a>
-
+  <h3>My Collections</h3>
+  <a type="button" class="btn btn-outline-dark" href="/collections/new">Add a Collection</a>
 </div>
 
 <div class="card-page-left">
   <% user.collections.forEach((collection) => { %>
-    
     <div class="card collectionCard" style="width: 18rem;">
       <a href="/collections/<%= collection.id %>">
-      <img src="<%= collection.cardImage %> " class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"><%= collection.title %></h5>
-        <p class="card-text"><small class="text-muted">Created by <%=user.name %> </small></p>
-        <% if (collection.description){ %>
-          <p class="card-text"><%= collection.description %> </p>
-        <% } %> 
-        <p class="card-text"><small class="text-muted">
-          <% if (collection.books.length === 1) { %>
-            <%= collection.books.length %> book</small></p>
-         <% } else { %>
-          <%= collection.books.length %> books</small></p>
-        <%  } %> 
-      </div>
+        <img src="<%= collection.cardImage %> " class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= collection.title %></h5>
+          <p class="card-text"><small class="text-muted">Created by <%=user.name %></small></p>
+          <% if (collection.description){ %>
+            <p class="card-text"><%= collection.description %> </p>
+          <% } %> 
+          <p class="card-text"><small class="text-muted">
+            <% if (collection.books.length === 1) { %>
+              <%= collection.books.length %> book</small></p>
+            <% } else { %>
+            <%= collection.books.length %> books</small></p>
+            <% } %> 
+        </div>
       </a> 
     </div>
-  <% }) %> 
-      
-    
+  <% }) %>  
 </div>
-
 
 <%- include('../partials/footer') %> 

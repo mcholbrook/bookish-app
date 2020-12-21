@@ -5,24 +5,22 @@
 <img src="<%= user.avatar %>" class="avatar-photo-med" alt=""> 
 <%= user.name %> 
 
-
 <div class="profileEdit">
-<form action="/users/profile?_method=PUT" method="POST" class="addCollection col-sm-6">
-  <div class="mb-3">
-    <label for="profileBio" class="form-label">Add a bio</label>
-    <input type="text" class="form-control" name="bio" aria-describedby="bioHelp" value="<%= user.bio %>">
-    <div id="bioHelp" class="form-text">Give yourself a bio. Come on, you can do it.</div>
-  </div>
-  <div class="mb-3">
-    <label for="userAvatar" class="form-label">Update your profile photo</label>
-    <input type="text" class="form-control" name="avatar" value="<%= user.avatar %> ">
-  </div>
-  <button type="submit" class="btn btn-dark">Update Profile</button>
-</form>
-
-
-<a type="button" class="btn btn-outline-dark" id="profileCancel" href="/users/profile">Cancel</a>
-
+  <form action="/users/profile?_method=PUT" method="POST" class="addCollection col-sm-6">
+    <div class="mb-3">
+      <label for="profileBio" class="form-label">Add a bio</label>
+      <input type="text" class="form-control" name="bio" aria-describedby="bioHelp" value="<%= user.bio %>">
+      <div id="bioHelp" class="form-text">
+        Give yourself a bio. Come on, you can do it.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="userAvatar" class="form-label">Update your profile photo</label>
+      <input type="text" class="form-control" name="avatar" value="<%= user.avatar %> ">
+    </div>
+    <button type="submit" class="btn btn-dark">Update Profile</button>
+  </form>
+  <a type="button" class="btn btn-outline-dark" id="profileCancel" href="/users/profile">Cancel</a>
 </div>
 
 <%- include('../partials/footer') %> 
