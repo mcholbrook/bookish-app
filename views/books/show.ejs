@@ -66,26 +66,19 @@
   <% } else { %>
     
    <% if (!bookInDb.reviews.some(u => {return u.ownerEmail === user.email})){ %>
-    <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
-    <label class="form-label">Leave a Review</label>
-    <input type="text" name="content" class="form-control">
-    <button type="submit" class="btn btn-dark iNeedSpace">Add Review</button>
-    </form>
-
-
+      <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
+      <label class="form-label">Leave a Review</label>
+      <input type="text" name="content" class="form-control">
+      <button type="submit" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px">Add Review</button>
+      </form>
    <% } %> 
-      
-    
-  
   <% } %> 
-
-
 
   <h5>Reviews</h5>
   <hr id"thickerLine">
   <% if (bookInDb && bookInDb.reviews.length!= 0) { %>
     <% bookInDb.reviews.forEach((review, idx) => { %>
-      <div class="oneReview">
+      <div class="oneReview w-100">
         <img src="<%= review.reviewerPhoto %> " alt="" class="avatar-photo-small">
         <%= review.reviewer %>
         <p><small><%= review.content %></small></p> 
