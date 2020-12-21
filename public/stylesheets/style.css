@@ -163,6 +163,7 @@ body {
   border: 1px #DFDFDF solid;
   border-radius: 4px;
   margin-right: 20px;
+  margin-bottom: 20px;
   padding-top: 10px;
   width: 60vw;
 }
@@ -175,10 +176,13 @@ body {
   width: 30%;
   padding: 20px;
   padding-right: 30px;
+  margin-bottom: 20px;
+  height: fit-content;
 }
 
 .oneReview {
   display: inline-block;
+  margin-top: 20px;
 }
 .oneReview img {
   float: left;
@@ -188,18 +192,20 @@ body {
   overflow: hidden;
 }
 
-hr #thickerLine {
-  display: block;
-  height: 4px;
-  border: 0;
-  color: #9B9D9E;
-}
-
 hr {
   display: block;
   height: 2px;
   border: 0;
   color: #9B9D9E;
+  margin: 0px; 
+}
+
+#thickerLine {
+  display: block;
+  height: 4px;
+  border: 0;
+  color: #9B9D9E;
+  margin-top: 10px;
 }
 
 .iNeedSpace {
