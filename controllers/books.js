@@ -54,7 +54,7 @@ function search(req, res){
             else {
               Book.findById(bookInDb._id)
               .then((newestBook) => {
-                newestBook.bookImage = "https://unsplash.com/photos/zvKx6ixUhWQ/200x200"
+                newestBook.bookImage = "https://source.unsplash.com/random/128x197/?books,library"
                 newestBook.save()
               })
             }
