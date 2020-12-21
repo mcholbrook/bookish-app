@@ -27,6 +27,7 @@ See the planning phase [here](https://trello.com/b/XNLgvTBI/unit-2-bookish).
 * Google Books API
 * Google OAuth
 * Heroku
+* Bootstrap
   
 ### **Future Enhancements**
 * Collaborative Collections
