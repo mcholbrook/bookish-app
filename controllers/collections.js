@@ -51,7 +51,7 @@ function show(req, res){
   Collection.findById(req.params.id)
   .populate('books')
   .then((collection) => {
-    res.render('collections/show', {title: 'Collection Details', collection, user: req.user._id })
+    res.render('collections/show', {title: 'Collection Details', collection, user: req.user})
   })
 }
 

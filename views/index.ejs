@@ -5,7 +5,7 @@
   <div class="card-page-left">
     <% randomCollections.forEach((collection) => { %>
       <div class="card collectionCard" style="width: 18rem;">
-        <a href="/collections/<%= collection.id %>">
+        <a href="/collections/<%= collection._id %>">
         <img src="<%= collection.cardImage %> " class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title"><%= collection.title %></h5>
@@ -24,7 +24,7 @@
       </div>
     <% }) %>
   </div>
-  <h3>Books to Explore</h3>
+  <h3 style="margin-top:20px">Books to Explore</h3>
   <div class="card-page-left">
     <% randomBooks.forEach((book) => { %>
       <div class="card mb-3 cardModule" style="max-width: 540px;">

@@ -5,7 +5,9 @@
   <h5><%= collection.description %> </h5>
 <% } %> 
 
-<a href="/collections/<%= collection.id %>/edit" type="button" class="btn btn-outline-dark">Edit this Collection</a>
+<% if (collection.ownerName === user.name){ %>
+  <a href="/collections/<%= collection.id %>/edit" type="button" class="btn btn-outline-dark">Edit this Collection</a>
+<% } %> 
 
 <% if (collection.books.length === 0){ %>
   <h5>There are no books in this collection yet! Go search for some!</h5> 
