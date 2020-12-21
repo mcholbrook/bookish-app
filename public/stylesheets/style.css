@@ -72,6 +72,7 @@ body {
   display: flex;
   justify-content: left;
   flex-wrap: wrap;
+  margin-left: -10px;
 }
 
 /* Styling for book cards */
