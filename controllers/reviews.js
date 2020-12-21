@@ -8,7 +8,6 @@ function create(req, res){
   console.log(req.params)
   console.log(req.params.googleBooksId)
   Book.findOne({googleBooksId: req.params.googleBooksId})
-
   .then((book) => {
     req.body.reviewer = req.user.name
     req.body.reviewerPhoto = req.user.avatar
@@ -19,7 +18,6 @@ function create(req, res){
     .then(() => {
       res.redirect(`/books/${book.googleBooksId}`)
     })
-  }
-  )
+  })
 }
 

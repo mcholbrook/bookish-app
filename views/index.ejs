@@ -1,7 +1,6 @@
 <%- include('partials/header') %>
 
 <% if (user) { %>
-  <h3>Featured Collections</h3>
   <h3>Collections from Our Community</h3>
   <div class="card-page-left">
     <% randomCollections.forEach((collection) => { %>
@@ -17,14 +16,14 @@
           <p class="card-text"><small class="text-muted">
             <% if (collection.books.length === 1) { %>
               <%= collection.books.length %> book</small></p>
-          <% } else { %>
-            <%= collection.books.length %> books</small></p>
-          <%  } %> 
+            <% } else { %>
+              <%= collection.books.length %> books</small></p>
+            <% } %> 
         </div>
       </a> 
       </div>
     <% }) %>
-    </div>
+  </div>
   <h3>Books to Explore</h3>
   <div class="card-page-left">
   <% randomBooks.forEach((book) => { %>

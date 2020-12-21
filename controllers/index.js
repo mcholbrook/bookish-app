@@ -2,7 +2,7 @@ const Book = require('../models/book')
 const User = require('../models/user')
 const Collection = require('../models/collection')
 const axios = require('axios')
-const { populate } = require('../models/book')
+
 
 module.exports = {
   index
