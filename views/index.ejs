@@ -4,26 +4,47 @@
   <h3>Featured Collections</h3>
   <h3>Collections from Our Community</h3>
   <div class="card-page-left">
-  <% randomCollections.forEach((collection) => { %>
-    <div class="card collectionCard" style="width: 18rem;">
-      <a href="/collections/<%= collection.id %>">
-      <img src="<%= collection.cardImage %> " class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"><%= collection.title %></h5>
-        <p class="card-text"><small class="text-muted">Created by <%=collection.ownerName %> </small></p>
-        <% if (collection.description){ %>
-          <p class="card-text"><%= collection.description %> </p>
-        <% } %> 
-        <p class="card-text"><small class="text-muted">
-          <% if (collection.books.length === 1) { %>
-            <%= collection.books.length %> book</small></p>
-         <% } else { %>
-          <%= collection.books.length %> books</small></p>
-        <%  } %> 
+    <% randomCollections.forEach((collection) => { %>
+      <div class="card collectionCard" style="width: 18rem;">
+        <a href="/collections/<%= collection.id %>">
+        <img src="<%= collection.cardImage %> " class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= collection.title %></h5>
+          <p class="card-text"><small class="text-muted">Created by <%=collection.ownerName %> </small></p>
+          <% if (collection.description){ %>
+            <p class="card-text"><%= collection.description %> </p>
+          <% } %> 
+          <p class="card-text"><small class="text-muted">
+            <% if (collection.books.length === 1) { %>
+              <%= collection.books.length %> book</small></p>
+          <% } else { %>
+            <%= collection.books.length %> books</small></p>
+          <%  } %> 
+        </div>
+      </a> 
       </div>
-    </a> 
+    <% }) %>
     </div>
-  <% }) %> 
+  <h3>Books to Explore</h3>
+  <div class="card-page-left">
+  <% randomBooks.forEach((book) => { %>
+    <div class="card mb-3 cardModule" style="max-width: 540px;">
+      <a href="/books/<%= book.googleBooksId %>">
+        <div class="row g-0">
+          <div class="col-4">
+            <img src="<%= book.bookImage %> " alt="...">
+          </div>
+          <div class="col-8">
+            <div class="card-body">
+              <h5 class="card-title line-clampTitle"><%= book.title %></h5>
+              <p class="card-text"><small class="text-muted"><%= book.author %></small></p>
+              <div id="card-description"><p class="card-text line-clamp"><%= book.description %></p> </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <% }) %> 
 </div>
 <% } else { %>
   <div class="loginPage">
@@ -31,15 +52,12 @@
       <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">Welcome to Bookish!</h5>
-        <p class="card-text">Save, organize, and review all your favorite books.</p>
+        <p class="card-text line-clamp">Save, organize, and review all your favorite books.</p>
         <br>
         <a href="/auth/google" class="btn btn-outline-dark">Login with Google</a>
       </div>
     </div>
   </div>
 <% } %> 
-
-
-
 
 <%- include('partials/footer') %>

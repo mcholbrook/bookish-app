@@ -71,25 +71,16 @@ function search(req, res){
 }
 
 function show(req, res){
-  // axios
-  //   .get(`https://www.googleapis.com/books/v1/volumes/${req.params.id}`)
-  //   .then((response) => {
-      User.findById(req.user._id)
-      .populate('collections')
-      .then((user) => {
-        Book.findOne({googleBooksId: req.params.id})
-        .then((bookInDb) => {
-          if (bookInDb){
-            // console.log(user)
-            res.render('books/show', {title: 'Book Details', user, bookInDb})
-          }
-          // else {
-          //   res.render('books/show', {title: 'Book Details', book: response.data, user,bookInDb: ""})
-          // }
-        })
-
-      })
-    // })
+  User.findById(req.user._id)
+  .populate('collections')
+  .then((user) => {
+    Book.findOne({googleBooksId: req.params.id})
+    .then((bookInDb) => {
+      if (bookInDb){
+        res.render('books/show', {title: 'Book Details', user, bookInDb})
+      }
+    })
+  })
 }
 
 

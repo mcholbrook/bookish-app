@@ -44,11 +44,10 @@ passport.use(
             newCollection.save(function(err){
               if (err) return (err)
             })
-            console.log(newCollection)
-             newUser.collections.push(newCollection._id)
-             newUser.save(function(err){
-               if (err) return (err)
-             })
+            newUser.collections.push(newCollection._id)
+            newUser.save(function(err){
+              if (err) return (err)
+            })
           }
         }
       });

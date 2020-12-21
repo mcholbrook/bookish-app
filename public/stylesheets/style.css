@@ -153,7 +153,7 @@ body {
   border: 1px #DFDFDF solid;
   border-radius: 4px;
   margin-right: 20px;
-  padding-top: 20px;
+  padding-top: 10px;
   width: 60vw;
 }
 
@@ -172,6 +172,14 @@ body {
 }
 .oneReview img {
   float: left;
+}
+
+/* #reviewInput {
+  
+} */
+
+#reviewText {
+  overflow: hidden;
 }
 
 hr #thickerLine {

@@ -1,6 +1,9 @@
 <%- include('../partials/header') %> 
 
 <h3><%= collection.title %></h3>
+<% if (collection.description){ %>
+  <h5><%= collection.description %> </h5>
+<% } %> 
 
 <a href="/collections/<%= collection.id %>/edit" type="button" class="btn btn-outline-dark">Edit this Collection</a>
 

@@ -9,20 +9,21 @@ module.exports = {
 }
 
 function index(req, res){
-  let randomCollections = Collection.aggregate(
-    [{$sample: {size: 2}}]
-  )
-  .then((randomCollections) => {
-    console.log(randomCollections)
-    randomCollections.forEach((collection) => {
-      Collection.findById(collection._id)
-      .populate('owner')
-      .then((collection2) => {
-        randomCollections.shift()
-        randomCollections.push(collection2)
-      }) 
+  let randomBooks = Book.aggregate([{$sample: {size: 8}}])
+  .then((randomBooks) => {
+    let randomCollections = Collection.aggregate(
+      [{$sample: {size: 4}}]
+    )
+    .then((randomCollections) => {
+      randomCollections.forEach((collection) => {
+        Collection.findById(collection._id)
+        .populate('owner')
+        .then((collection2) => {
+          randomCollections.shift()
+          randomCollections.push(collection2)
+        }) 
+      })
+      res.render('index', {title:'Bookish', user : req.user ? req.user : null, randomCollections, randomBooks})
     })
-    console.log(randomCollections)
-      res.render('index', {title:'Bookish', user : req.user ? req.user : null, randomCollections})
   })
 }

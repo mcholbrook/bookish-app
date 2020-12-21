@@ -9,19 +9,19 @@
 </form> 
 
 <% if (results){ %>
-  <div class="card-page">
+  <div class="card-page-left">
     <% results.forEach((book) => { %>
       <div class="card mb-3 cardModule" style="max-width: 540px;">
         <a href="/books/<%= book.id %>">
           <div class="row g-0">
-            <div class="col-md-4 my-auto">
+            <div class="col-4 my-auto">
               <% if(!book.volumeInfo.imageLinks){%>
                 <img src="https://source.unsplash.com/random/128x197/?books,library" alt="...">
               <% } else { %>
                 <img src="<%=book.volumeInfo.imageLinks.thumbnail %>" alt="">
               <% } %>
             </div>
-            <div class="col-md-8">
+            <div class="col-8">
               <div class="card-body">
                 <h5 class="card-title line-clampTitle"><%= book.volumeInfo.title %></h5>
                 <p class="card-text"><small class="text-muted"><%= book.volumeInfo.authors %></small></p>
@@ -37,7 +37,7 @@
   </div>
 <% } else { %>
   <h4>Here are some ideas to get you started...</h4>
-  <div class="card-page">
+  <div class="card-page-left">
     <% randomBooks.forEach((book) => { %>
       <div class="card mb-3 cardModule" style="max-width: 540px;">
         <a href="/books/<%= book.googleBooksId %>">

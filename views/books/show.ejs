@@ -48,27 +48,19 @@
   </div>
 </div>
 
-
-<!-- If the book is in a user's collection, allow them to submit a review. If they have already submitted a review, they can't submit a second review. Maybe a way to render their review at the top and the rest of the reviews below? -->
-
- 
-
-
-
-<!-- Print all reviews to the page. -->
+<!-- If a user has not submitted a review yet, allow them to submit a review. Print all reviews to the page. -->
 <div class="showPageReviewInfo">
   <% if (bookInDb.reviews.length == 0) { %>
     <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
       <label class="form-label">Leave a Review</label>
-      <input type="text" name="content" class="form-control">
-      <button type="submit" class="btn btn-dark iNeedSpace">Add Review</button>
+      <textarea name="content" class="form-control" id="reviewInput" row="4"></textarea>
+      <button type="submit" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px">Add Review</button>
       </form>
   <% } else { %>
-    
    <% if (!bookInDb.reviews.some(u => {return u.ownerEmail === user.email})){ %>
       <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
       <label class="form-label">Leave a Review</label>
-      <input type="text" name="content" class="form-control">
+      <textarea name="content" class="form-control" id="reviewInput" row="4"></textarea>
       <button type="submit" class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px">Add Review</button>
       </form>
    <% } %> 
@@ -80,8 +72,9 @@
     <% bookInDb.reviews.forEach((review, idx) => { %>
       <div class="oneReview w-100">
         <img src="<%= review.reviewerPhoto %> " alt="" class="avatar-photo-small">
+        <div id="reviewText">
         <%= review.reviewer %>
-        <p><small><%= review.content %></small></p> 
+        <p><small><%= review.content %></small></p> </div>
       </div>
       <% if (idx != bookInDb.reviews.length - 1) { %>
         <hr>
