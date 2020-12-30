@@ -27,6 +27,9 @@ function newBook(req, res){
   })
 }
 
+
+// The below code is ~wild~, this is the refactor I had to do because of the issue with Google Books API. Functionally, it creates books in the database based off of the return results from the user's search. This is good because it means all show pages can render without an additional API call, but bad because of duplicates and extra noise/less signal.  
+
 function search(req, res){
   axios
   .get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.query}&key=${process.env.BOOKS_API_KEY}`)

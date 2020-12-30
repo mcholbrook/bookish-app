@@ -12,8 +12,7 @@ function index(req, res){
   let randomBooks = Book.aggregate([{$sample: {size: 8}}])
   .then((randomBooks) => {
     let randomCollections = Collection.aggregate(
-      [{$sample: {size: 4}}]
-    )
+      [{$sample: {size: 4}}])
     .then((randomCollections) => {
       randomCollections.forEach((collection) => {
         Collection.findById(collection._id)

@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <!-- If a user has not submitted a review yet, allow them to submit a review. -->
+  <!-- If a user has not submitted a review yet, allow them to submit a review. You can leave a review even if you haven't added the book to your collection because people may not want to save books they dont' like. -->
   <div class="showPageReviewInfo">
     <% if (bookInDb.reviews.length == 0) { %>
       <form action="/books/<%= bookInDb.googleBooksId%>/reviews" method="POST">
