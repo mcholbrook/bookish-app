@@ -4,7 +4,6 @@ Bookish is an app that allows you to catalogue and organize the books in your li
 
 As a lifelong reader, I have always struggled with trying to keep track of all of the books I have read, want to read, want to buy and already own. I also wanted to be able to further organize books into personally meaningful collections. This is my attempt at solving that problem! 
 
-## Take a look at [Bookish](http://bookishapp.herokuapp.com)! 
 
 ![](https://i.imgur.com/F5TuYKv.png)
 
